@@ -12,7 +12,7 @@ function App() {
       <header className="Header"> 
       <Navbar/>
       </header>
-      <body>
+      <body className='Body'>
 
         <p>NotNull Company</p>
         <img src={logo} className="logo"/>
