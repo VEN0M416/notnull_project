@@ -12,12 +12,12 @@ function App() {
       <header className="Header"> 
       <Navbar/>
       </header>
-      <body className='Body'>
+      <div className='Body'>
 
         <p>NotNull Company</p>
-        <img src={logo} className="logo"/>
+        <img src={logo} className="logo" alt="логотип"/>
         
-      </body>
+      </div>
       
     </div>
   );
