@@ -5,9 +5,9 @@ const Rout= () =>{
   return (
   <div className="Navbar">
     <Link to="/" className="nav">Main</Link>
-    <Link to="/cats" className="nav">Page1</Link>
-    <Link to="/sheeps" className="nav">Page2</Link>
-    <Link to="/goats" className="nav">Page3</Link>
+    <Link to="/Page1" className="nav">Page1</Link>
+    <Link to="/Page2" className="nav">Page2</Link>
+    <Link to="/Page3" className="nav">Page3</Link>
   </div>
   );
 }
