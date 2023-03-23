@@ -20,3 +20,6 @@
 .nav:active{
     background-color: #a1a5aa62;
 } 
+.nav::after{
+    background-color: #152330;
+} 
