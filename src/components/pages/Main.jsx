@@ -1,19 +1,17 @@
 import '../styles/Main.css';
 import logo from '../Img/logo.png';
-import Navbar from '../navbar/navbar';
+import Header from '../Header/Header';
 
 const Main = () =>{
     return (
       <div className="Main">
-      <header className="Header"> 
-      <Navbar/>
-      </header>
-      <div className='Body'>
+        <Header/>
+        <div className='Body'>
 
-        <p>NotNull Company</p>
-        <img src={logo} className="logo" alt="логотип"/>
-        
-      </div>
+          <p>NotNull Company</p>
+          <img src={logo} className="logo" alt="логотип"/>
+          
+        </div>
       
     </div>
     );

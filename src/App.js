@@ -1,14 +1,10 @@
-import Particle from './background/Particle';
-import Main from './components/pages/Main';
-
+import Router from './components/Router/Router';
 
 function App() {
 
   return (
     <div className="App">
-      <Particle/>
-      <Main/>
-      
+      <Router/>
     </div>
   );
 }
