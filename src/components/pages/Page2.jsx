@@ -2,13 +2,14 @@ import Header from '../Header/Header'
 
 const Page2 = () =>{
     return (
-      <div>
+      <>
         <Header/>
-        <h2>Page2</h2>
-        <div>
+        <div className='container mx-auto text-white'>
 
+          <p className='text-2xl pt-[50px]'>Page2</p>
+          
         </div>
-      </div>
+      </>
     );
   }
   export default Page2;

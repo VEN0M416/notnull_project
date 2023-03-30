@@ -1,19 +1,17 @@
-import '../styles/Main.css';
-import logo from '../Img/logo.png';
+import crypto from '../Img/crypto.png';
 import Header from '../Header/Header';
 
 const Main = () =>{
     return (
-      <div className="Main">
+      <>
         <Header/>
-        <div className='Body'>
+        <div className='container mx-auto text-white'>
 
-          <p>NotNull Company</p>
-          <img src={logo} className="logo" alt="логотип"/>
+          <p className='text-center text-3xl font-[600] pt-[50px]'>NotNull Company</p>
+          <img src={crypto} className="mx-auto pt-6" alt="логотип"/>
           
         </div>
-      
-    </div>
+      </>
     );
   }
   export default Main;
