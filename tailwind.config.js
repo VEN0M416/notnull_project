@@ -9,6 +9,7 @@ module.exports = {
         headerLinks: '#d5d9df',
         hoverBg: '#a9aeb429',
         activeBg: '#a1a5aa62',
+        formBg: '#2d2868',
       },
       padding:{
 
