@@ -19,5 +19,5 @@ public class AuthorisationController {
     @PostMapping("/registration")
     private RegistrationResponse registration(@RequestBody RegistrationReq user){
         return registrationImpl.save(user);
-    }
+    }//
 }
