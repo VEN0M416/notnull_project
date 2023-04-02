@@ -6,7 +6,6 @@ import com.example.notnullproject.models.responses.RegistrationResponse;
 import com.example.notnullproject.repositories.UsersRepo;
 import com.example.notnullproject.services.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 

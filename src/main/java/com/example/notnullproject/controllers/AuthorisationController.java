@@ -14,8 +14,16 @@ public class AuthorisationController {
     @Autowired
     private RegistrationImpl registrationImpl;
 
+    /**
+     * @author Vladimir Krasnov
+     * @param user
+     * @return status
+     * -already exists
+     * -done
+     */
     @PostMapping("/registration")
     private RegistrationResponse registration(@RequestBody RegistrationReq user){
         return registrationImpl.save(user);
     }
+
 }
