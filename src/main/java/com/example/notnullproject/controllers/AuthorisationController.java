@@ -16,10 +16,12 @@ public class AuthorisationController {
 
     /**
      * @author Vladimir Krasnov
-     * @param user
-     * @return status
-     * -already exists
-     * -done
+     * @param user на вход:
+     *             String username,
+     *             String password
+     * @return status:
+     *             user already exists,
+     *             done
      */
     @PostMapping("/registration")
     private RegistrationResponse registration(@RequestBody RegistrationReq user){
