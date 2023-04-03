@@ -1,9 +1,6 @@
 package com.example.notnullproject.models.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -12,6 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Setter
 @ToString
 @RequiredArgsConstructor
+@NoArgsConstructor
 public class Sessions {
 
     @Id
@@ -22,8 +20,4 @@ public class Sessions {
     @NonNull
     private String username;
 
-
-    public Sessions(){
-
-    };
 }

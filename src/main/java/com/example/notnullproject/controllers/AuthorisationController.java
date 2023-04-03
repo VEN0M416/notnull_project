@@ -4,6 +4,8 @@ import com.example.notnullproject.models.requestBodies.LoginReq;
 import com.example.notnullproject.models.requestBodies.RegistrationReq;
 import com.example.notnullproject.models.responses.LoginResponse;
 import com.example.notnullproject.models.responses.RegistrationResponse;
+import com.example.notnullproject.services.service.LoginService;
+import com.example.notnullproject.services.service.RegistrationService;
 import com.example.notnullproject.services.serviceImpl.LoginImpl;
 import com.example.notnullproject.services.serviceImpl.RegistrationImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,10 @@ import org.springframework.web.bind.annotation.*;
 public class AuthorisationController {
 
     @Autowired
-    private RegistrationImpl registrationImpl;
+    private RegistrationService registrationService;
 
     @Autowired
-    private LoginImpl loginImpl;
+    private LoginService loginService;
 
     /**
      * @author Vladimir Krasnov
@@ -31,12 +33,12 @@ public class AuthorisationController {
      */
     @PostMapping("/registration")
     private RegistrationResponse registration(@RequestBody RegistrationReq user){
-        return registrationImpl.save(user);
+        return registrationService.save(user);
     }
 
     @PostMapping("/login")
     private LoginResponse login(@RequestBody LoginReq user){
-        return loginImpl.send(user);
+        return loginService.send(user);
     }
 
 }

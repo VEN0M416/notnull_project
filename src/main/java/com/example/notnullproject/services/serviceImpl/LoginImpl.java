@@ -1,6 +1,7 @@
 package com.example.notnullproject.services.serviceImpl;
 
 import com.example.notnullproject.models.entities.Sessions;
+import com.example.notnullproject.models.entities.Users;
 import com.example.notnullproject.models.requestBodies.LoginReq;
 import com.example.notnullproject.models.responses.LoginResponse;
 import com.example.notnullproject.passwordEncoder.PasswordEncoder;
@@ -8,6 +9,7 @@ import com.example.notnullproject.repositories.SessionsRepo;
 import com.example.notnullproject.repositories.UsersRepo;
 import com.example.notnullproject.services.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -37,10 +39,10 @@ public class LoginImpl implements LoginService {
         } else if(!sessionsRepo.existsByUsername(user.getUsername())){
             session.setUsername(user.getUsername());
             sessionsRepo.save(session);
-            response.setSessionId(
-                    sessionsRepo.findByUsername(
-                            user.getUsername())
-                            .getSessionId());
+            Users userForSave = usersRepo.findByUsername(user.getUsername());
+            userForSave.setSession(session);
+            usersRepo.save(userForSave);
+            response.setSessionId(session.getSessionId());
             response.setStatus("done");
         } else {
             response.setSessionId(

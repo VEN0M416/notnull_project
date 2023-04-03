@@ -8,6 +8,7 @@ import lombok.*;
 @Setter
 @ToString
 @RequiredArgsConstructor
+@NoArgsConstructor
 public class Users {
 
     @Id
@@ -19,8 +20,8 @@ public class Users {
     @NonNull
     private String password;
 
-    
-    public Users() {
+    @OneToOne
+    private Sessions session;
 
-    }
+
 }
