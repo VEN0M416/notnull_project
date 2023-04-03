@@ -25,7 +25,9 @@ public class RegistrationImpl implements RegistrationService{
         if(usersRepo.existsByUsername(user.getUsername())){
             response.setStatus("user already exists");
         }else{
-            Users globalUser = new Users(user.getUsername(), passwordEncoder.encode(user.getPassword()));
+            Users globalUser = new Users(
+                    user.getUsername(),
+                    passwordEncoder.encode(user.getPassword()));
             usersRepo.save(globalUser);
             response.setStatus("done");
         }
