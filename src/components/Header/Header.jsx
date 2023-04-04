@@ -4,7 +4,6 @@ import Particle from '../../background/Particle';
 import SignUpForm from '../Forms/SignUpForm';
 
 const LnkStyle="hover:bg-hoverBg rounded-[10px] py-1 px-4 active:bg-activeBg";
-/* const BtnStyle="hover:bg-hoverBg rounded-[10px] py-1 px-4 active:bg-activeBg"; */
 
 const Header= () =>{
   return (
