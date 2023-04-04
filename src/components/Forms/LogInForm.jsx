@@ -5,17 +5,14 @@ import { api } from '../../core/api';
 const InputStyle=' flex w-full my-4 p-3 pl-9 rounded-[10px] bg-gray-100 placeholder:text-black/50 placeholder:font-light placeholder:text-xl';
 
 
-export default function SignUpForm() {
+export default function LogInForm() {
 
     const [user, setUser] = useState({
         name:"",
         password:"",
     })
-    const [isCorrect, setCrPss] = useState(true);
 
     const send=()=>{
-        {/* Расскоментировать при запуске хоста в Backend */}
-        /* api.post('/authorisation/registration',{username: user.name, password: user.password}).then((res)=>{console.log(res.data.status)}); */
         console.log(user);
     }
 
@@ -38,7 +35,7 @@ export default function SignUpForm() {
             type="button"
             onClick={openModal}
             className="hover:bg-hoverBg rounded-[10px] py-1 px-4  active:bg-activeBg"
-            >Sign Up</button>
+            >Log In</button>
         </div>
 
         <Transition appear show={isOpen} as={Fragment}>
@@ -83,7 +80,7 @@ export default function SignUpForm() {
                             onClick={closeModal}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                         </svg>
-                        USER SIGNUP
+                        USER LOGIN
                         </Dialog.Title>
 
                     <div className="mt-2">
@@ -118,26 +115,9 @@ export default function SignUpForm() {
                             placeholder='password' 
                             onChange={(e)=>{
                                 setUser((prevState=>({...prevState,password: e.target.value})));
-                                e.target.value === user.password ? setCrPss(true) : setCrPss(false);
                             }}
                         />
-                        <svg 
-                            xmlns="http://www.w3.org/2000/svg" 
-                            fill="none" 
-                            viewBox="0 0 24 24" 
-                            strokeWidth="1.5" 
-                            stroke="currentColor" 
-                            className="fixed w-6 h-6 ml-2 mt-3 text-black/50">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                        </svg>
-                        <input 
-                            className={InputStyle} 
-                            type="password" 
-                            name="confirmPassword"
-                            placeholder='confirm password' 
-                            onChange={(e)=>{e.target.value === user.password ? setCrPss(true) : setCrPss(false);}}
-                        />
-                        {!isCorrect && <span className='text-base text-red-500'>Пароли не совпадают!</span>}
+                        
                         <div className='flex mt-2 text-white justify-between '>
                             <div>
                                 <input type="checkbox" id="rememder" className=' cursor-pointer'/>
@@ -154,13 +134,11 @@ export default function SignUpForm() {
                         type="button"
                         className="inline-flex justify-center w-full rounded-md border border-transparent bg-[#2fc0ff] px-4 py-2 text-lg font-medium text-white hover:bg-blue-500 active:bg-[#2fc0ff] focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                         onClick={()=> {
-                            if (isCorrect){
-                                send();
+                            send();
                             closeModal();
-                            }
                         }}
                         >
-                        Sign Up
+                        Log In
                         </button>
                     </div>
                 </Dialog.Panel>

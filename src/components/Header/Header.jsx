@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import Particle from '../../background/Particle';
 import SignUpForm from '../Forms/SignUpForm';
+import LogInForm from '../Forms/LogInForm';
 
 const LnkStyle="hover:bg-hoverBg rounded-[10px] py-1 px-4 active:bg-activeBg";
 
@@ -19,6 +20,7 @@ const Header= () =>{
           </div>
           <div className='space-x-2 flex'>
             <SignUpForm/>
+            <LogInForm/>
           </div>
         </div>
       </div>
