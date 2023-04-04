@@ -1,10 +1,13 @@
 package com.example.notnullproject.controllers;
 
 import com.example.notnullproject.models.requestBodies.LoginReq;
+import com.example.notnullproject.models.requestBodies.LogoutReq;
 import com.example.notnullproject.models.requestBodies.RegistrationReq;
 import com.example.notnullproject.models.responses.LoginResponse;
+import com.example.notnullproject.models.responses.LogoutResponse;
 import com.example.notnullproject.models.responses.RegistrationResponse;
 import com.example.notnullproject.services.service.LoginService;
+import com.example.notnullproject.services.service.LogoutService;
 import com.example.notnullproject.services.service.RegistrationService;
 import com.example.notnullproject.services.serviceImpl.LoginImpl;
 import com.example.notnullproject.services.serviceImpl.RegistrationImpl;
@@ -22,6 +25,9 @@ public class AuthorisationController {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private LogoutService logoutService;
+
     /**
      * @author Vladimir Krasnov
      * @param user на вход:
@@ -36,9 +42,25 @@ public class AuthorisationController {
         return registrationService.save(user);
     }
 
+    /**
+     * @author Vladimir Krasnov
+     * @param user на вход:
+     *             String username,
+     *             String password
+     * @return status:
+     *              user does not exist
+     *              wrong password
+     *              done
+     *         sessionId:
+     *              String {sessionId}
+     */
     @PostMapping("/login")
     private LoginResponse login(@RequestBody LoginReq user){
         return loginService.send(user);
+    }
+    @PostMapping("/logout")
+    private LogoutResponse logout(@RequestBody LogoutReq sessionId){
+        return logoutService.quit(sessionId);
     }
 
 }

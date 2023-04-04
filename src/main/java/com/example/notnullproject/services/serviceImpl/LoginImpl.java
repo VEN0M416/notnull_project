@@ -29,7 +29,7 @@ public class LoginImpl implements LoginService {
         LoginResponse response = new LoginResponse();
         Sessions session = new Sessions();
         if(!usersRepo.existsByUsername(user.getUsername())){
-            response.setStatus("user does not exists");
+            response.setStatus("user does not exist");
         }else if(!passwordEncoder.matches(
                 user.getPassword(),
                 usersRepo.findByUsername(
