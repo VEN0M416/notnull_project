@@ -58,6 +58,14 @@ public class AuthorisationController {
     private LoginResponse login(@RequestBody LoginReq user){
         return loginService.send(user);
     }
+
+    /**
+     * @author Vladimir krasnov
+     * @param sessionId на вход:
+     *                  String sessionId
+     * @return status:
+     *                  done
+     */
     @PostMapping("/logout")
     private LogoutResponse logout(@RequestBody LogoutReq sessionId){
         return logoutService.quit(sessionId);

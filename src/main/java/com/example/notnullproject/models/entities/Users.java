@@ -20,7 +20,7 @@ public class Users {
     @NonNull
     private String password;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Sessions session;
 
 

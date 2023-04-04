@@ -8,4 +8,6 @@ public interface SessionsRepo extends CrudRepository<Sessions, Integer> {
     boolean existsByUsername(String username);
 
     Sessions findByUsername(String username);
+
+    Sessions findBySessionId(String sessionId);
 }
