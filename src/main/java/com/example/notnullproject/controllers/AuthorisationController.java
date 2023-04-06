@@ -60,7 +60,7 @@ public class AuthorisationController {
     }
 
     /**
-     * @author Vladimir krasnov
+     * @author Vladimir Krasnov
      * @param sessionId на вход:
      *                  String sessionId
      * @return status:
