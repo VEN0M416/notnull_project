@@ -22,6 +22,7 @@ const Header= () =>{
             <Link to="/Page1" className={LnkStyle}>Page1</Link>
             <Link to="/Page2" className={LnkStyle}>Page2</Link>
             <Link to="/Page3" className={LnkStyle}>Page3</Link>
+            <Link to="/chat" className={LnkStyle}>Chat</Link> 
           </div>
 
           <div className='space-x-2 flex'>
