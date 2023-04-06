@@ -30,6 +30,15 @@ module.exports = {
       padding:{
 
       },
+      animation: {
+        'appearanceInp': 'ani 1.5s forwards',
+      },
+      keyframes: {
+        ani: {
+          '0%': {opacity: 0},
+          '100%': {opacity: 1}
+        },
+      }
     },
   },
   plugins: [],
