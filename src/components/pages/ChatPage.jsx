@@ -47,6 +47,11 @@ function ChatPage () {
           }
     };
 
+    {
+        /app/message
+        /chatroom/public
+    }
+
     const handleKeyDown = (event) => {
         if (event.key === "Enter") {
           sendMessage();
