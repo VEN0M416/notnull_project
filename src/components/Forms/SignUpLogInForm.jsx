@@ -45,9 +45,11 @@ export default function SignUpLogInForm() {
                 setUser({name: "", password: ""});
             } else if(res.data.status === 'wrong password'){
                 setPassWrong(true);
+                setNotReg(false);
                 return;
             } else if(res.data.status === 'user does not exist'){
                 setNotReg(true);
+                setPassWrong(false);
                 return;
             }
         });
