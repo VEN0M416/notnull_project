@@ -1,56 +1,82 @@
 import Header from "../Header/Header";
 import { useState, useEffect, useRef } from "react";
+import {over} from 'stompjs';
+import SockJS from 'sockjs-client';
+
 
 
 function ChatPage () {
 
-    const [connection, setConnection] = useState(false);
+    const stompClient = useRef(null);
+
+    const [connection, setConnection] = useState(true);
     const [currentMessage, setCurrentMesssage] = useState("");
-    const [messages, setMessages] = useState([
-        {username: "Владимир", message: "Привет"},
-        {username: "Амон", message: "Привет"},
-        {username: "Владимир", message: "Как дела?"},
-        {username: "Амон", message: "Хорошо, ты как?"},
-        {username: "Владимир", message: "Тоже"},
-        {username: "Амон", message: "Пока!"},
+    
+    const [chatHistory, setChatHistory] = useState([
+        {username: "Владимир", message: "Привет", date: "08.04.2023, 11:26:16"},
+        {username: "Амон", message: "Привет", date: "08.04.2023, 11:26:17"},
+        {username: "Владимир", message: "Как дела?", date: "08.04.2023, 11:26:18"},
+        {username: "Амон", message: "Хорошо, ты как?", date: "08.04.2023, 11:26:19"},
+        {username: "Владимир", message: "Тоже", date: "08.04.2023, 11:26:20"},
+        {username: "Амон", message: "Пока!", date: "08.04.2023, 11:26:21"},
     ]);
 
     const myName = "Владимир";
 
-    useEffect(() => {
-        const Socket = new WebSocket('ws://localhost:8082/ws');
-
-        Socket.onopen = () => {
-            console.log('WebSocket opened');
-            setConnection(true);
-        };
-
-        Socket.onclose = () => {
-            console.log('WebSocket closed');
-            setConnection(false);
-        };
-
-        return () => {
-            Socket.close();
-        };
-    }, []);
-    
-
-    const sendMessage = (e) => {
-        if (currentMessage.trim() !== "") {
-            const newMessage = {
-              username: myName,
-              message: currentMessage.trim()
-            };
-            setCurrentMesssage("");
-            setMessages([...messages, newMessage]);
-          }
+    const connected = () => {
+        stompClient.current = over(new SockJS('http://localhost:8082/ws'));
+        stompClient.current.connect({}, onConnected, onError);
     };
 
-    {
-        /app/message
-        /chatroom/public
-    }
+    const onConnected =()=>{
+        console.log('WS connected');
+        stompClient.current.subscribe('/chatroom/public', chatMessages());
+        setConnection(true);
+    };
+
+    const chatMessages = (payload) => {
+
+        const payloadData = JSON.parse(payload.body);
+        console.log(payloadData);
+        setChatHistory((prev)=>[
+          ...prev,
+          {
+            username: payloadData.senderName,
+            message: payloadData.message,
+            date: payloadData.date
+          }]
+        );
+    };    
+
+    const sendMessage=()=>{
+        if(stompClient.current !== null) {
+            if (currentMessage.trim() !== "") {
+                const newDate = new Date();
+                const newMessage = {
+                  username: myName,
+                  message: currentMessage.trim(),
+                  date: newDate.toLocaleString(),
+                };
+                stompClient.current.send("/app/message", {}, JSON.stringify(newMessage));
+                setCurrentMesssage("");
+                setChatHistory([...chatHistory, newMessage]);
+            }
+        }
+    };
+
+    const onError =()=>{
+        console.log('WS error');
+        setConnection(false);
+    };
+
+    useEffect(() => { //подключаемся / отключаемся
+        stompClient.current = over(new SockJS('http://localhost:8082/ws'));
+        stompClient.current.connect({}, onConnected, onError);
+
+        return () => { // выполняется при размонтировании компонента
+            stompClient.current && stompClient.current.disconnect();
+        };
+    }, []);
 
     const handleKeyDown = (event) => {
         if (event.key === "Enter") {
@@ -58,12 +84,12 @@ function ChatPage () {
         }
     };
     
-    const chatEndRef = useRef(null); 
+    const chatEndRef = useRef(null); // ссылка на конец чата 
 
     // Обновляем скролл до конца чата каждый раз, когда добавляется новое сообщение
     useEffect(() => {
         chatEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }, [messages]);
+    }, [chatHistory]);
 
     return(<>
         <Header/>
@@ -72,9 +98,9 @@ function ChatPage () {
                 <div className="flex flex-col h-full overflow-x-auto mb-4 ">
 
                     <div className="grid grid-cols-12 gap-y-2 ">
-                        {messages.map((msg) => (
-                            msg.username !== myName ?
-                            (<div className="col-start-1 col-end-8 p-3 rounded-lg">
+                        {chatHistory.map((msg) => ( /* выводим весь чат */
+                            msg.username !== myName ? /* чьё сообщение  */
+                            (<div key={msg.date} className="col-start-1 col-end-8 p-3 rounded-lg">
                                 <div className="flex flex-row items-center">
                                     <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
                                         {msg.username[0]} {/* // первая буква */}
@@ -85,7 +111,7 @@ function ChatPage () {
                                 </div>
                             </div>)
                             :
-                            (<div className="col-start-6 col-end-13 p-3 rounded-lg">
+                            (<div key={msg.date} className="col-start-6 col-end-13 p-3 rounded-lg">
                                 <div className="flex items-center justify-start flex-row-reverse">
                                     <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
                                         {msg.username[0]}
@@ -101,26 +127,6 @@ function ChatPage () {
                     {!connection && (<div className="text-center text-red-500">Чат сломался :(</div>)}
                 </div>
                 <div className="flex flex-row items-center h-16 rounded-xl bg-[#314f71] bg-transparent w-full px-4" >
-                    
-                    <div>
-                        {/*  <button className="flex items-center justify-center text-gray-400 hover:text-gray-600">
-                            <svg
-                            className="w-5 h-5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                            >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
-                            >
-                            </path>
-                            </svg>
-                        </button> */}
-                    </div>
 
                     <div className="flex-grow ml-4">
                         <div className="relative w-full">
