@@ -3,13 +3,14 @@ import { useCookies } from 'react-cookie';
 
 export default function LogOutForm() {
 
-    const [cookies, setCookie, removeCookie] = useCookies(['sessionId']);
+    const [cookies, setCookie, removeCookie] = useCookies(['sessionId', 'username']);
 
     const send = () => {  
         api.post('/authorisation/logout',{sessionId: cookies.sessionId}).then((res)=>{
             if(res.data.status === 'done') {
                 console.log('success log out');
                 removeCookie('sessionId', { path: '/', sameSite: 'Lax' });
+                removeCookie('username', { path: '/', sameSite: 'Lax' });
             }
         });
     }

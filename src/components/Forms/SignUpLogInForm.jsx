@@ -9,7 +9,7 @@ const InputStyle=' flex w-full my-4 p-3 pl-9 rounded-[10px] bg-gray-100 placehol
 
 export default function SignUpLogInForm() {
 
-    const [cookies, setCookie] = useCookies(['sessionId']);
+    const [cookies, setCookie] = useCookies(['sessionId','username']);
     const [PassWrong ,setPassWrong] = useState(false);
     const [NotReg ,setNotReg] = useState(false);
 
@@ -41,6 +41,7 @@ export default function SignUpLogInForm() {
         api.post('/authorisation/login',{username: user.name, password: user.password}).then((res)=>{
             if(res.data.status === 'done'){
                 setCookie('sessionId', res.data.sessionId, { path: '/', sameSite: 'Lax' });
+                setCookie('username', user.name, { path: '/', sameSite: 'Lax' });
                 closeModal();
                 setUser({name: "", password: ""});
             } else if(res.data.status === 'wrong password'){
@@ -214,10 +215,10 @@ export default function SignUpLogInForm() {
                             xmlns="http://www.w3.org/2000/svg" 
                             fill="none" 
                             viewBox="0 0 24 24" 
-                            stroke-width="1.5" 
+                            strokeWidth="1.5" 
                             stroke="currentColor" 
                             className="w-7 h-7 mr-2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
                         </svg>}
                         {Empty && <>Заполните все поля формы!</>}
                         {NotReg && <>Вы ещё не зарегистрированы!</>}

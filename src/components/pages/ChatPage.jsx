@@ -2,26 +2,19 @@ import Header from "../Header/Header";
 import { useState, useEffect, useRef } from "react";
 import {over} from 'stompjs';
 import SockJS from 'sockjs-client';
-
+import { useCookies } from 'react-cookie';
 
 
 function ChatPage () {
-
+    const [cookies, setCookie] = useCookies(['username']);
     const stompClient = useRef(null);
 
     const [connection, setConnection] = useState(true);
     const [currentMessage, setCurrentMessage] = useState("");
     
-    const [chatHistory, setChatHistory] = useState([
-        {senderName: "Владимир", message: "Привет", date: "08.04.2023, 11:26:16"},
-        {senderName: "Амон", message: "Привет", date: "08.04.2023, 11:26:17"},
-        {senderName: "Владимир", message: "Как дела?", date: "08.04.2023, 11:26:18"},
-        {senderName: "Амон", message: "Хорошо, ты как?", date: "08.04.2023, 11:26:19"},
-        {senderName: "Владимир", message: "Тоже", date: "08.04.2023, 11:26:20"},
-        {senderName: "Амон", message: "Пока!", date: "08.04.2023, 11:26:21"},
-    ]);
+    const [chatHistory, setChatHistory] = useState([]);
 
-    const myName = "Владимир";
+    const myName = cookies.username;
 
     const onConnected =()=>{
         console.log('WS connected');

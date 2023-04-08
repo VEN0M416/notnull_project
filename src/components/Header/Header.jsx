@@ -10,7 +10,7 @@ const LnkStyle="hover:bg-hoverBg rounded-[10px] py-1 px-4 active:bg-activeBg";
 
 const Header= () =>{
 
-  const [cookies, setCookie] = useCookies(['sessionId']);
+  const [cookies, setCookie] = useCookies(['username', 'sessionId']);
 
   return (
     <>
@@ -28,10 +28,10 @@ const Header= () =>{
           <div className='space-x-2 flex'>
             {
               (cookies.sessionId)? (
-                <>
-                  Signed in as:{cookies.sessionId}
+                <div className='flex items-center'>
+                  <div className='mx-2'>Signed in as:{" "+cookies.username}</div>
                   <LogOutForm/>
-                </>
+                </div>
               ) : (
                 <>
                   <SignUpLogInForm/>
