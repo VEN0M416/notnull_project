@@ -10,38 +10,33 @@ function ChatPage () {
     const stompClient = useRef(null);
 
     const [connection, setConnection] = useState(true);
-    const [currentMessage, setCurrentMesssage] = useState("");
+    const [currentMessage, setCurrentMessage] = useState("");
     
     const [chatHistory, setChatHistory] = useState([
-        {username: "Владимир", message: "Привет", date: "08.04.2023, 11:26:16"},
-        {username: "Амон", message: "Привет", date: "08.04.2023, 11:26:17"},
-        {username: "Владимир", message: "Как дела?", date: "08.04.2023, 11:26:18"},
-        {username: "Амон", message: "Хорошо, ты как?", date: "08.04.2023, 11:26:19"},
-        {username: "Владимир", message: "Тоже", date: "08.04.2023, 11:26:20"},
-        {username: "Амон", message: "Пока!", date: "08.04.2023, 11:26:21"},
+        {senderName: "Владимир", message: "Привет", date: "08.04.2023, 11:26:16"},
+        {senderName: "Амон", message: "Привет", date: "08.04.2023, 11:26:17"},
+        {senderName: "Владимир", message: "Как дела?", date: "08.04.2023, 11:26:18"},
+        {senderName: "Амон", message: "Хорошо, ты как?", date: "08.04.2023, 11:26:19"},
+        {senderName: "Владимир", message: "Тоже", date: "08.04.2023, 11:26:20"},
+        {senderName: "Амон", message: "Пока!", date: "08.04.2023, 11:26:21"},
     ]);
 
     const myName = "Владимир";
 
-    const connected = () => {
-        stompClient.current = over(new SockJS('http://localhost:8082/ws'));
-        stompClient.current.connect({}, onConnected, onError);
-    };
-
     const onConnected =()=>{
         console.log('WS connected');
-        stompClient.current.subscribe('/chatroom/public', chatMessages());
+        stompClient.current.subscribe('/chatroom/public', chatMessages);
         setConnection(true);
     };
 
     const chatMessages = (payload) => {
-
+        console.log(payload);
         const payloadData = JSON.parse(payload.body);
         console.log(payloadData);
         setChatHistory((prev)=>[
           ...prev,
           {
-            username: payloadData.senderName,
+            senderName: payloadData.senderName,
             message: payloadData.message,
             date: payloadData.date
           }]
@@ -53,13 +48,12 @@ function ChatPage () {
             if (currentMessage.trim() !== "") {
                 const newDate = new Date();
                 const newMessage = {
-                  username: myName,
+                  senderName: myName,
                   message: currentMessage.trim(),
                   date: newDate.toLocaleString(),
                 };
                 stompClient.current.send("/app/message", {}, JSON.stringify(newMessage));
-                setCurrentMesssage("");
-                setChatHistory([...chatHistory, newMessage]);
+                setCurrentMessage("");
             }
         }
     };
@@ -71,7 +65,7 @@ function ChatPage () {
 
     useEffect(() => { //подключаемся / отключаемся
         stompClient.current = over(new SockJS('http://localhost:8082/ws'));
-        stompClient.current.connect({}, onConnected, onError);
+        stompClient.current.connect({}, onConnected, onError); 
 
         return () => { // выполняется при размонтировании компонента
             stompClient.current && stompClient.current.disconnect();
@@ -99,11 +93,11 @@ function ChatPage () {
 
                     <div className="grid grid-cols-12 gap-y-2 ">
                         {chatHistory.map((msg) => ( /* выводим весь чат */
-                            msg.username !== myName ? /* чьё сообщение  */
+                            msg.senderName !== myName ? /* чьё сообщение  */
                             (<div key={msg.date} className="col-start-1 col-end-8 p-3 rounded-lg">
                                 <div className="flex flex-row items-center">
                                     <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                                        {msg.username[0]} {/* // первая буква */}
+                                        {msg.senderName[0]} {/* // первая буква */}
                                     </div>
                                     <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
                                         <div>{msg.message}</div>
@@ -114,7 +108,7 @@ function ChatPage () {
                             (<div key={msg.date} className="col-start-6 col-end-13 p-3 rounded-lg">
                                 <div className="flex items-center justify-start flex-row-reverse">
                                     <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                                        {msg.username[0]}
+                                        {msg.senderName[0]}
                                     </div>
                                     <div className="relative mr-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
                                         <div>{msg.message}</div>
@@ -133,7 +127,7 @@ function ChatPage () {
                             <input
                             onKeyDown={handleKeyDown}
                             value={currentMessage}
-                            onChange={(e)=>setCurrentMesssage(e.target.value)}
+                            onChange={(e)=>setCurrentMessage(e.target.value)}
                             type="text"
                             className="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
                             />
