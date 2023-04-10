@@ -5,9 +5,13 @@ import Page2 from "../pages/Page2.jsx";
 import Page3 from "../pages/Page3.jsx";
 import NotFoundPage from "../pages/NotFoundPage.jsx";
 import ChatPage from "../pages/ChatPage.jsx";
+import { useCookies } from 'react-cookie';
+
 
 
 function Router() {
+  const [cookies, setCookie] = useCookies(['sessionId']);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -17,7 +21,7 @@ function Router() {
         <Route path='/Page3' element={<Page3/> } />
         <Route path="/*" element={<NotFoundPage/>}/>
 
-        <Route path="/chat" element={<ChatPage/>}/>
+        {cookies.sessionId && <Route path="/chat" element={<ChatPage/>}/>}
       </Routes>
     </BrowserRouter>
   );
