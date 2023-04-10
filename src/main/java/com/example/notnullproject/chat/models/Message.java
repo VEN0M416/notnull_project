@@ -9,7 +9,7 @@ import lombok.*;
 @ToString
 public class Message {
 
-    private String senderName;
+    private String username;
     private String message;
     private String date;
 }

@@ -1,7 +1,7 @@
 package com.example.notnullproject.services.serviceImpl;
 
-import com.example.notnullproject.models.entities.Sessions;
-import com.example.notnullproject.models.entities.Users;
+import com.example.notnullproject.models.entities.Session;
+import com.example.notnullproject.models.entities.User;
 import com.example.notnullproject.models.requestBodies.LogoutReq;
 import com.example.notnullproject.models.responses.LogoutResponse;
 import com.example.notnullproject.repositories.SessionsRepo;
@@ -22,12 +22,12 @@ public class LogoutImpl implements LogoutService {
     @Override
     public LogoutResponse quit(LogoutReq sessionId) {
         LogoutResponse response = new LogoutResponse();
-        Users user = usersRepo.findBySession(
+        User user = usersRepo.findBySession(
                 sessionsRepo.findBySessionId(
                         sessionId.getSessionId()
                 )
         );
-        Sessions session = sessionsRepo.findBySessionId(
+        Session session = sessionsRepo.findBySessionId(
                 sessionId.getSessionId()
         );
         user.setSession(null);

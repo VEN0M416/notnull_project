@@ -11,7 +11,8 @@ import org.hibernate.annotations.GenericGenerator;
 @ToString
 @RequiredArgsConstructor
 @NoArgsConstructor
-public class Sessions {
+@Table(name = "sessions")
+public class Session {
 
     @Id
     @GenericGenerator(name = "uuid2", strategy = "uuid2")

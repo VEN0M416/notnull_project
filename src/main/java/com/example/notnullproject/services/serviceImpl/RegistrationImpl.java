@@ -1,6 +1,6 @@
 package com.example.notnullproject.services.serviceImpl;
 
-import com.example.notnullproject.models.entities.Users;
+import com.example.notnullproject.models.entities.User;
 import com.example.notnullproject.models.requestBodies.RegistrationReq;
 import com.example.notnullproject.models.responses.RegistrationResponse;
 import com.example.notnullproject.passwordEncoder.PasswordEncoder;
@@ -25,7 +25,7 @@ public class RegistrationImpl implements RegistrationService{
         if(usersRepo.existsByUsername(user.getUsername())){
             response.setStatus("user already exists");
         }else{
-            Users globalUser = new Users(
+            User globalUser = new User(
                     user.getUsername(),
                     passwordEncoder.encode(user.getPassword()));
             usersRepo.save(globalUser);

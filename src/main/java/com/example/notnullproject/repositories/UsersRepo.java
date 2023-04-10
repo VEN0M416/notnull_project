@@ -1,12 +1,12 @@
 package com.example.notnullproject.repositories;
 
-import com.example.notnullproject.models.entities.Sessions;
-import com.example.notnullproject.models.entities.Users;
+import com.example.notnullproject.models.entities.Session;
+import com.example.notnullproject.models.entities.User;
 import org.springframework.data.repository.CrudRepository;
 
-public interface UsersRepo extends CrudRepository<Users, Integer> {
+public interface UsersRepo extends CrudRepository<User, Integer> {
     boolean existsByUsername(String username);
-    Users findByUsername(String username);
+    User findByUsername(String username);
 
-    Users findBySession(Sessions session);
+    User findBySession(Session session);
 }
