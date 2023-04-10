@@ -1,6 +1,6 @@
 package com.example.notnullproject.chat.services.serviceImpl;
 
-import com.example.notnullproject.chat.models.Message;
+import com.example.notnullproject.chat.models.requestBodies.MessageReq;
 import com.example.notnullproject.chat.services.service.MessageSaverService;
 import com.example.notnullproject.models.entities.PastMessage;
 import com.example.notnullproject.models.entities.User;
@@ -17,7 +17,7 @@ public class MessageSaverImpl implements MessageSaverService {
     private UsersRepo usersRepo;
 
     @Override
-    public void saveMessage(Message message) {
+    public void saveMessage(MessageReq message) {
         User user = usersRepo.findByUsername(message.getUsername());
         List<PastMessage> list = user.getPastMessage();
         PastMessage pastMessage = new PastMessage();

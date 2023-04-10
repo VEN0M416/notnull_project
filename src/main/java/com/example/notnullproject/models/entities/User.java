@@ -11,7 +11,6 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
@@ -30,7 +29,8 @@ public class User {
     @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Session session;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "username")
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "username_id")
     private List<PastMessage> pastMessage = new ArrayList<>();
 
 

@@ -1,6 +1,6 @@
 package com.example.notnullproject.chat.controller;
 
-import com.example.notnullproject.chat.models.Message;
+import com.example.notnullproject.chat.models.requestBodies.MessageReq;
 import com.example.notnullproject.chat.services.service.MessageSaverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -18,7 +18,7 @@ public class ChatController {
 
     @MessageMapping("/message")
     @SendTo("/chatroom/public")
-    private Message receivePublicMessage(@Payload Message message){
+    private MessageReq receivePublicMessage(@Payload MessageReq message){
         messageSaverService.saveMessage(message);
         return message;
     }

@@ -1,4 +1,4 @@
-package com.example.notnullproject.chat.models;
+package com.example.notnullproject.chat.models.requestBodies;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Message {
+public class MessageReq {
 
     private String username;
     private String message;
