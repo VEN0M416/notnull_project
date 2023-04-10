@@ -12,6 +12,7 @@ export default function SignUpLogInForm() {
     const [cookies, setCookie] = useCookies(['sessionId','username']);
     const [PassWrong ,setPassWrong] = useState(false);
     const [NotReg ,setNotReg] = useState(false);
+    const [alreadyReg ,setAlreadyReg] = useState(false);
 
     const [user, setUser] = useState({
         name:"",
@@ -28,10 +29,18 @@ export default function SignUpLogInForm() {
             return;
         }   
         api.post('/authorisation/registration',{username: user.name, password: user.password}).then((res)=>{
-            console.log(res.data.status);
+            if(res.data.status === 'done'){
+                closeModal();
+                setCookie('sessionId', res.data.sessionId, { path: '/', sameSite: 'Lax' });
+                setCookie('username', user.name, { path: '/', sameSite: 'Lax' });
+                setUser({name: "", password: ""})
+            } else if(res.data.status === 'user already exists'){
+                setAlreadyReg(true);
+                return;
+            }
+            
         });
-        closeModal();
-        setUser({name: "", password: ""})
+        
     }
     const send2 = () => {
         if (user.name === "" || user.password === "") {
@@ -70,6 +79,7 @@ export default function SignUpLogInForm() {
         setEmpty(false);
         setNotReg(false);
         setPassWrong(false);
+        setAlreadyReg(false);
     }
 
     function openModal() {
@@ -223,6 +233,7 @@ export default function SignUpLogInForm() {
                         {Empty && <>Заполните все поля формы!</>}
                         {NotReg && <>Вы ещё не зарегистрированы!</>}
                         {PassWrong && <>Неверный пароль!</>}
+                        {alreadyReg && <>Такой пользователь уже существует!</>}
                     </div>
                     <div className="mt-7">
                         {typeForm && <button

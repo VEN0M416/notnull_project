@@ -6,7 +6,7 @@ import SockJS from 'sockjs-client';
 var stompClient =null;
 const Page1 = () => {
   const [userMsg, setUserMsg] = useState({
-    senderName: '',
+    username: '',
     message: '',
     date: '',
   });
@@ -34,12 +34,12 @@ const Page1 = () => {
     if(stompClient !== null) {
       const newDate = new Date();
       var mess={ 
-        senderName: userMsg.senderName,
+        username: userMsg.username,
         message: userMsg.message,
         date: newDate.toLocaleString()}
       stompClient.send("/app/message", {}, JSON.stringify(mess));
       setUserMsg((prevState=>({
-        ...prevState,senderName: "",
+        ...prevState,username: "",
         ...prevState,message: "",
         ...prevState,date: ""
       })));
@@ -49,11 +49,11 @@ const Page1 = () => {
   const chatMessages = (payload) => {
     const payloadData = JSON.parse(payload.body);
     console.log(payloadData);
-    const isOwnMessage = signedName === payloadData.senderName;
+    const isOwnMessage = signedName === payloadData.username;
     setpublicMsg((prevState) => [
       ...prevState,
       {
-        sender: payloadData.senderName,
+        sender: payloadData.username,
         mess: payloadData.message,
         dat: payloadData.date,
         position: isOwnMessage ? "justify-end" : "justify-start", // устанавливаем позицию сообщения
@@ -82,7 +82,7 @@ const Page1 = () => {
             placeholder='Имя пользователя' 
             className=' mx-3 text-black px-2 py-1 rounded'
             onChange={(e)=>{
-              setUserMsg((prevState=>({...prevState, senderName: e.target.value})));
+              setUserMsg((prevState=>({...prevState, username: e.target.value})));
               setSignedName(e.target.value);
             }}
           />

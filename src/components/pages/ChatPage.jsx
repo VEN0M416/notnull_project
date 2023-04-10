@@ -29,7 +29,7 @@ function ChatPage () {
         setChatHistory((prev)=>[
           ...prev,
           {
-            senderName: payloadData.senderName,
+            username: payloadData.username,
             message: payloadData.message,
             date: payloadData.date
           }]
@@ -41,7 +41,7 @@ function ChatPage () {
             if (currentMessage.trim() !== "") {
                 const newDate = new Date();
                 const newMessage = {
-                  senderName: myName,
+                  username: myName,
                   message: currentMessage.trim(),
                   date: newDate.toLocaleString(),
                 };
@@ -86,11 +86,11 @@ function ChatPage () {
 
                     <div className="grid grid-cols-12 gap-y-2 ">
                         {chatHistory.map((msg) => ( /* выводим весь чат */
-                            msg.senderName !== myName ? /* чьё сообщение  */
+                            msg.username !== myName ? /* чьё сообщение  */
                             (<div key={msg.date} className="col-start-1 col-end-8 p-3 rounded-lg">
                                 <div className="flex flex-row items-center">
                                     <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                                        {msg.senderName[0]} {/* // первая буква */}
+                                        {msg.username[0]} {/* // первая буква */}
                                     </div>
                                     <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
                                         <div>{msg.message}</div>
@@ -101,7 +101,7 @@ function ChatPage () {
                             (<div key={msg.date} className="col-start-6 col-end-13 p-3 rounded-lg">
                                 <div className="flex items-center justify-start flex-row-reverse">
                                     <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                                        {msg.senderName[0]}
+                                        {msg.username[0]}
                                     </div>
                                     <div className="relative mr-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
                                         <div>{msg.message}</div>

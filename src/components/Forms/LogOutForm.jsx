@@ -1,9 +1,11 @@
 import { api } from '../../core/api';
 import { useCookies } from 'react-cookie';
+import { useNavigate } from "react-router-dom";
 
 export default function LogOutForm() {
 
     const [cookies, setCookie, removeCookie] = useCookies(['sessionId', 'username']);
+    const navigate = useNavigate();
 
     const send = () => {  
         api.post('/authorisation/logout',{sessionId: cookies.sessionId}).then((res)=>{
@@ -11,6 +13,7 @@ export default function LogOutForm() {
                 console.log('success log out');
                 removeCookie('sessionId', { path: '/', sameSite: 'Lax' });
                 removeCookie('username', { path: '/', sameSite: 'Lax' });
+                navigate('/', { replace: true });
             }
         });
     }
