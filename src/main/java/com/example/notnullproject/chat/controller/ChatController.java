@@ -1,7 +1,7 @@
 package com.example.notnullproject.chat.controller;
 
 import com.example.notnullproject.chat.models.Message;
-import com.example.notnullproject.chat.services.service.MessageSaver;
+import com.example.notnullproject.chat.services.service.MessageSaverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public class ChatController {
 
     @Autowired
-    private MessageSaver messageSaver;
+    private MessageSaverService messageSaverService;
 
     @MessageMapping("/message")
     @SendTo("/chatroom/public")
     private Message receivePublicMessage(@Payload Message message){
-        messageSaver.saveMessage(message);
+        messageSaverService.saveMessage(message);
         return message;
     }
 }

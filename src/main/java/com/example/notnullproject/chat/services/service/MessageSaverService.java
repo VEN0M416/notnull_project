@@ -4,6 +4,6 @@ import com.example.notnullproject.chat.models.Message;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface MessageSaver {
+public interface MessageSaverService {
     void saveMessage(Message message);
 }

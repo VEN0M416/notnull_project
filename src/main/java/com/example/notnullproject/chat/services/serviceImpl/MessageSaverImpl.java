@@ -1,7 +1,7 @@
 package com.example.notnullproject.chat.services.serviceImpl;
 
 import com.example.notnullproject.chat.models.Message;
-import com.example.notnullproject.chat.services.service.MessageSaver;
+import com.example.notnullproject.chat.services.service.MessageSaverService;
 import com.example.notnullproject.models.entities.PastMessage;
 import com.example.notnullproject.models.entities.User;
 import com.example.notnullproject.repositories.UsersRepo;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MessageSaverImpl implements MessageSaver {
+public class MessageSaverImpl implements MessageSaverService {
 
     @Autowired
     private UsersRepo usersRepo;
