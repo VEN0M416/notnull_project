@@ -2,7 +2,10 @@ package com.example.notnullproject.models.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,8 +32,9 @@ public class User {
     private Session session;
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "username")
+    @Fetch(value = FetchMode.SUBSELECT)
     @ToString.Exclude
-    private List<PastMessage> pastMessage;
+    private List<PastMessage> pastMessage = new ArrayList<>();
 
 
 }
