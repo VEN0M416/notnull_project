@@ -4,6 +4,7 @@ import Particle from '../../background/Particle';
 import SignUpLogInForm from '../Forms/SignUpLogInForm';
 import { useCookies } from 'react-cookie';
 import LogOutForm from '../Forms/LogOutForm';
+import DropLink from '../DropLink/DropLink';
 
 
 const LnkStyle="hover:bg-hoverBg rounded-[10px] py-1 px-4 active:bg-activeBg";
@@ -31,6 +32,7 @@ const Header= () =>{
                 <div className='flex items-center'>
                   <div className='mx-2'>Signed in as:{" "+cookies.username}</div>
                   <LogOutForm/>
+                  <DropLink/>
                 </div>
               ) : (
                 <>

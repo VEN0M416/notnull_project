@@ -1,0 +1,13 @@
+/* Ваш остальной CSS-код */
+
+select option[value="male"] {
+  background-color: rgba(250, 250, 250, 0.2);
+}
+
+select option[value="female"] {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+select option[value="non-binary"] {
+  background-color: rgba(255, 255, 255, 0.1);
+}
