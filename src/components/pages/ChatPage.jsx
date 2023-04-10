@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import {over} from 'stompjs';
 import SockJS from 'sockjs-client';
 import { useCookies } from 'react-cookie';
+import { api } from "../../core/api";
 
 
 function ChatPage () {
@@ -59,6 +60,7 @@ function ChatPage () {
     useEffect(() => { //подключаемся / отключаемся
         stompClient.current = over(new SockJS('http://localhost:8082/ws'));
         stompClient.current.connect({}, onConnected, onError); 
+        getHistoryOfChat();
 
         return () => { // выполняется при размонтировании компонента
             stompClient.current && stompClient.current.disconnect();
@@ -70,6 +72,32 @@ function ChatPage () {
           sendMessage();
         }
     };
+
+    const getHistoryOfChat=()=>{
+        api.get('/pastMessages/load').then((res)=> {
+            console.log(res.data);
+            Object.entries(res.data).map(([key, value]) => {
+                setChatHistory((prev)=>[
+                    ...prev,
+                    {
+                        username: value.username,
+                        message: value.message,
+                        date: value.date
+                    }]
+                );
+            })
+            /* const payloadData = JSON.parse(payload.body);
+            console.log(payloadData);
+            setChatHistory((prev)=>[
+            ...prev,
+            {
+                username: payloadData.username,
+                message: payloadData.message,
+                date: payloadData.date
+            }]
+            ); */
+        })
+    }
     
     const chatEndRef = useRef(null); // ссылка на конец чата 
 

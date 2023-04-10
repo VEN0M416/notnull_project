@@ -31,8 +31,8 @@ export default function SignUpLogInForm() {
         api.post('/authorisation/registration',{username: user.name, password: user.password}).then((res)=>{
             if(res.data.status === 'done'){
                 closeModal();
-                setCookie('sessionId', res.data.sessionId, { path: '/', sameSite: 'Lax' });
-                setCookie('username', user.name, { path: '/', sameSite: 'Lax' });
+                /* setCookie('sessionId', res.data.sessionId, { path: '/', sameSite: 'Lax' });
+                setCookie('username', user.name, { path: '/', sameSite: 'Lax' }); */
                 setUser({name: "", password: ""})
             } else if(res.data.status === 'user already exists'){
                 setAlreadyReg(true);
@@ -136,7 +136,7 @@ export default function SignUpLogInForm() {
                     leaveFrom="opacity-100 scale-100"
                     leaveTo="opacity-0 scale-95"
                 >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl border-2 border-[#8696b0]  bg-gradient-to-b from-[#32528a] to-[#30384a] p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-lg border-2 border-[#8696b0]  bg-gradient-to-b from-[#32528a] to-[#30384a] p-6 text-left align-middle shadow-xl transition-all">
                     
 
                     <Dialog.Title
@@ -210,7 +210,7 @@ export default function SignUpLogInForm() {
                             onChange={(e)=>{e.target.value === user.password ? setCrPss(true) : setCrPss(false);}}
                         />
                         {!isCorrect && <span className='text-base text-red-500'>Пароли не совпадают!</span>}</>}
-                        <div className='flex mt-2 text-white justify-between '>
+                        {/* <div className='flex mt-2 text-white justify-between '>
                             <div>
                                 <input type="checkbox" id="rememder" className=' cursor-pointer'/>
                                 <label className="ml-3 text-base cursor-pointer" htmlFor="rememder">Remember Me</label>
@@ -218,7 +218,7 @@ export default function SignUpLogInForm() {
                             <p
                                 className=' cursor-pointer'
                             >Forgot password?</p>
-                        </div>
+                        </div> */}
                     </div>
                     <div className='flex justify-center mt-5 text-red-500 items-center'>
                         {(Empty || NotReg || PassWrong) && <svg 
@@ -272,6 +272,7 @@ export default function SignUpLogInForm() {
                             onClick={()=>{
                                 closeModal();
                                 setTypeForm(true);
+                                setCrosPtr(true);
                                 resetIsShowing();
                             }}
                         >Are you not registered yet? Go to sign up</p>}
