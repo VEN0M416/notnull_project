@@ -47,9 +47,9 @@ const Profile = () =>{
                   <span></span>
                 <p>Дата рождения</p>
                 <input type="datetime-local" id="meeting-time"
-       name="meeting-time" defaultValue="2003-03-1215:32"
-       className='bg-white/20 rounded placeholder:text-white text-white px-3 py-1'
-       ></input>
+                  name="meeting-time" defaultValue="2003-03-1215:32"
+                  className='bg-white/20 rounded placeholder:text-white text-white px-3 py-1'
+                ></input>
                 </div>
               </div>
             </Tab.Panel>

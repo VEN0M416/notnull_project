@@ -35,9 +35,9 @@ const Header= () =>{
                   <DropLink/>
                 </div>
               ) : (
-                <>
+                <div className='whitespace-nowrap'>
                   <SignUpLogInForm/>
-                </>
+                </div>
               )
             }
           </div>
