@@ -99,5 +99,6 @@ public class StockServiceImpl implements StockService {
         log.info("Time getting prices - {}", System.currentTimeMillis() - start);
         return new StocksPricesDto(prices);
     }
+    //
 
 }
