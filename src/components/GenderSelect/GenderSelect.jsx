@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 
-function GenderSelect() {
+function GenderSelect( {onChange} ) {
   const [gender, setGender] = useState("");
 
   const handleGenderChange = (e) => {
-    setGender(e.target.value);
+    onChange(e.target.value);
   };
 
   return (
@@ -14,7 +14,6 @@ function GenderSelect() {
       <select
         id="gender-select"
         className="rounded-md border-white-20 bg-white/20 border text-white color-white shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        value={gender}
         onChange={handleGenderChange}
       >
         <option className="bg-white/20 text-black" value="male">Мужской</option>

@@ -1,11 +1,16 @@
 import Header from '../Header/Header'
 import GenderSelect from '../GenderSelect/GenderSelect';
 import { Tab } from '@headlessui/react';
+import { useState } from 'react';
 
 const tabStyle = "my-1 px-3 py-2 text-gray-400 leading-5 rounded-md focus:outline-none focus:text-white focus:bg-gray-700 hover:text-white hover:bg-gray-700";
 const inputStyle = "my-1 bg-white/20 rounded placeholder:text-gray-400 text-white px-3 py-1";
 
 const Page3 = () =>{
+  const [gender, setGender] = useState("");
+  const handleGenderChange=(e)=>{
+    setGender(e);
+  }
 
   return (
     <>
@@ -38,7 +43,7 @@ const Page3 = () =>{
                         className={inputStyle}
                       />
                       <p>Пол</p>
-                      <GenderSelect/> 
+                      <GenderSelect onChange={handleGenderChange}/> 
                       <p>Никнейм</p>
                       <input 
                         placeholder="Никнейм" 
@@ -47,7 +52,9 @@ const Page3 = () =>{
                       <br/>
                       <button 
                         className="my-3 border px-4 py-1 rounded text-white"
-                        /* onClick={} */
+                        onClick={()=>{
+                          console.log(gender);
+                        }}
                       > Сохранить</button>
                     </div>
                     <div className="mx-3">
