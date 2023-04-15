@@ -1,135 +1,77 @@
 import Header from '../Header/Header'
-import React, { useState, useRef, useEffect } from 'react';
-import {over} from 'stompjs';
-import SockJS from 'sockjs-client';
+import { useState, Fragment } from "react";
+import { Data1 } from '../charts/Data1';
+import LineChart from '../charts/LineChart';
+import React from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { useTimeoutFn } from 'react-use';
 
-var stompClient =null;
-const Page1 = () => {
-  const [userMsg, setUserMsg] = useState({
-    username: '',
-    message: '',
-    date: '',
+const Page4 = () => {
+  const [chartData, setChartData] = useState({
+    labels: Data1[0].chartPrice.map((data) => data.date),
+    datasets: [{
+      label: "Сбербанк",
+      data: Data1[0].chartPrice.map((data) => data.price),
+      /* tension: 0.4, */
+    } 
+    ]
   });
-  const [publicMsg, setpublicMsg] = useState([]);
-  const [showMessage, setShowMessage] = useState(false);
-  const [signed, setSigned] = useState(false);
-  const [signedName, setSignedName] = useState(''); 
-  const [currentMessage, setCurrentMesssage] = useState("");
+  const lastData = Data1[0].chartPrice.slice(-1)[0];
 
-  const chatWindowRef = useRef(null);
-  
-  const connect =()=>{
-    let Sock = new SockJS('http://localhost:8082/ws');
-    stompClient = over(Sock);
-    stompClient.connect({},onConnected, onError);
-  }
-  const onConnected =()=>{
-    console.log('WS connected')
-    stompClient.subscribe('/chatroom/public', chatMessages);
-  }
-  const onError =()=>{
-    console.log('WS error')
-  }
-  const send=()=>{
-    if(stompClient !== null) {
-      const newDate = new Date();
-      var mess={ 
-        username: userMsg.username,
-        message: userMsg.message,
-        date: newDate.toLocaleString()}
-      stompClient.send("/app/message", {}, JSON.stringify(mess));
-      setUserMsg((prevState=>({
-        ...prevState,username: "",
-        ...prevState,message: "",
-        ...prevState,date: ""
-      })));
-      setCurrentMesssage("");
-    }
-  }
-  const chatMessages = (payload) => {
-    const payloadData = JSON.parse(payload.body);
-    console.log(payloadData);
-    const isOwnMessage = signedName === payloadData.username;
-    setpublicMsg((prevState) => [
-      ...prevState,
-      {
-        sender: payloadData.username,
-        mess: payloadData.message,
-        dat: payloadData.date,
-        position: isOwnMessage ? "justify-end" : "justify-start", // устанавливаем позицию сообщения
-      },
-    ]);
-    setShowMessage(true);
-  };
+  const thStyle = 'py-3 px-10';
+  const trStyle = 'py-1 px-10';
+  /*   const [showChart1, setShowChart1] = useState(false);
+    const [showChart2, setShowChart2] = useState(false); */
 
-  useEffect(() => {
-    chatWindowRef.current.scrollIntoView({ behavior: 'smooth' });
-  }, [publicMsg]);
+  /* -------------------------------------------------------------------- */
+  let [isOpen, setIsOpen] = useState(false)
 
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  let [crossPointer, setCrosPtr] = useState(false);
+
+  let [, , resetIsShowing] = useTimeoutFn(() => crossPointer ? setIsOpen(true) : setIsOpen(false), 500)
 
   return (
     <>
-      <Header/>
-    <div className=' mx-auto text-white'>
+      <Header />
+      <div className='w-11/12 mx-auto text-white'>
 
-      <p className='text-2xl pt-[50px]'>Page1</p>
+        <p className='text-2xl pt-[50px]'>Page1</p>
 
-      <div className=' border-2 p-4 mt-5'>
-        
-        {!signed && <div className='flex my-2'>
-          <input 
-            type="text" 
-            placeholder='Имя пользователя' 
-            className=' mx-3 text-black px-2 py-1 rounded'
-            onChange={(e)=>{
-              setUserMsg((prevState=>({...prevState, username: e.target.value})));
-              setSignedName(e.target.value);
-            }}
-          />
-          <button 
-            className='mx-3 bg-gray-400 px-2 rounded'
-            onClick={()=>{
-              connect();
-              setSigned(true);
-            }}
-          >Подключиться</button>
-        </div>}
-        {signed && <div className='ml-3 flex my-2 text-lg'>Signed as:{' '+signedName}</div>}
-        {signed && <div className=' flex my-2'>
-          <input 
-            type="text" 
-            value={currentMessage}
-            placeholder='Введите сообщение' 
-            className=' mx-3 text-black px-2 py-1 rounded'
-            onChange={(e)=>{
-              setUserMsg((prevState=>({...prevState, message: e.target.value})));
-              setCurrentMesssage(e.target.value);
-            }}
-          />
-          <button 
-            className='mx-3 bg-gray-400 px-2 rounded'
-            onClick={()=>{
-              setUserMsg((prevState=>({...prevState, date: new Date()})))
-              send();
-            }}
-          >Отправить</button>
-        </div>}
+        <div className="w-full h-[50vh] rounded-xl p-2
+        bg-gradient-to-tr from-[#141E30]/80 to-[#243B55]/80 bg-transparent backdrop-blur-sm">
 
-        <div className='border-2 h-[500px] mx-3 my-4 text-white overflow-auto'>
-          {showMessage &&
-            publicMsg.map((msg, index) => (
-              <div key={index} className={`flex my-3 mx-10 ${msg.position}`}>
-              <div className='bg-white p-1 px-3 rounded-l text-lg text-black'>{msg.sender + " : " + msg.mess}</div>
-              <div className='bg-gray-400 p-1 pr-1 items-end pt-3 rounded-r text-sm text-black'>{msg.dat}</div>
+          <div className='grid grid-cols-12 py-2'> {/* header */}
+            <div className='col-span-1'></div>
+            <div className='text-left col-span-7'>Название</div>
+            <div className='text-center col-span-2'>Цена</div>
+            <div className='text-center col-span-2'>Изменение за сутки</div>
+          </div>
+
+          <div className='flex flex-col'>
+
+            <div className='flex flex-row bg-white rounded-lg text-black p-2'>
+              <div className='relative w-10 h-10 rounded-full overflow-hidden mx-auto'>
+                <img className='' src="https://invest-brands.cdn-tinkoff.ru/sber3x640.png"/>
+              </div>
+            
+              <div className=''>
+                zdfgzgagz
+              </div>
             </div>
-          ))}
-          <div ref={chatWindowRef}/>
-        </div>
 
+          </div>
+
+        </div>
       </div>
-      
-    </div>
     </>
   );
 }
-  export default Page1;
+export default Page4;
