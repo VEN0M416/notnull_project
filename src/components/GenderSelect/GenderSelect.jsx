@@ -17,8 +17,8 @@ function GenderSelect( {onChange} ) {
         onChange={handleGenderChange}
       >
         <option className="bg-white/20 text-black" value="male">Мужской</option>
-    <option className="bg-white/20  text-black" value="female">Женский</option>
-    <option className="bg-white/20  text-black" value="non-binary">Вертолет Апач</option>
+        <option className="bg-white/20  text-black" value="female">Женский</option>
+        <option className="bg-white/20  text-black" value="non-binary">Вертолет Апач</option>
       </select>
     </div>
   );
