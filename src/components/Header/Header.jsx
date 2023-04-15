@@ -23,6 +23,7 @@ const Header= () =>{
             <Link to="/Page1" className={LnkStyle}>Page1</Link>
             <Link to="/Page2" className={LnkStyle}>Page2</Link>
             <Link to="/Page3" className={LnkStyle}>Page3</Link>
+            <Link to="/Page4" className={LnkStyle}>Page4</Link>
             {cookies.sessionId && <Link to="/chat" className={LnkStyle}>Chat</Link>} 
           </div>
 
