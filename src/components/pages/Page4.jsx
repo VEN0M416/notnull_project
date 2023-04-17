@@ -1,6 +1,6 @@
 import Header from '../Header/Header'
 import { useState, Fragment } from "react";
-import { Data1 } from '../charts/Data1';
+import { Data1 } from '../charts/MainData';
 import LineChart from '../charts/LineChart';
 import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
@@ -12,10 +12,9 @@ const Page4 = () => {
     datasets: [{
       label: "Сбербанк",
       data: Data1[0].chartPrice.map((data) => data.price),
-      /* tension: 0.4, */
-    } 
-    ]
+    }]
   });
+
   const lastData = Data1[0].chartPrice.slice(-1)[0];
 
   const thStyle = 'py-3 px-10';
@@ -45,9 +44,9 @@ const Page4 = () => {
 
         <p className='text-2xl pt-[50px]'>Page4</p>
 
-        <div className='bg-[#035b39] my-5 p-1 w-max rounded-lg text-white relative'>
+        <div className='bg-cyan-900 my-5 p-1 w-max rounded-lg text-white relative'>
           <table className='table-auto'>
-            <thead className='bg-[#035b39] font-medium '>
+            <thead className='bg-cyan-900 font-medium '>
               <tr>
                 <th className={thStyle}>Bank</th>
                 <th className={thStyle}>CurDate</th>
@@ -58,7 +57,7 @@ const Page4 = () => {
             </thead>
             <tbody>
               <tr
-                className='text-center bg-[#00402f] hover:bg-white/10 cursor-pointer border-2 border-[#035b39]'
+                className='text-center bg-cyan-950 hover:bg-white/10 cursor-pointer border-2 border-cyan-900'
                 onClick={openModal}
               >
                 <td className={trStyle}>{Data1[0].name}</td>
@@ -94,7 +93,7 @@ const Page4 = () => {
                     leaveFrom="opacity-100 scale-100"
                     leaveTo="opacity-0 scale-95"
                   >
-                    <Dialog.Panel className=" w-full max-w-5xl transform overflow-hidden rounded-lg  bg-gradient-to-b from-[#035b39] to-[#00402f] p-2 text-left align-middle shadow-xl transition-all">
+                    <Dialog.Panel className=" w-full max-w-5xl transform overflow-hidden rounded-lg  bg-gradient-to-b from-cyan-900 to-cyan-950 p-2 text-left align-middle shadow-xl transition-all">
                       <Dialog.Title
                         as="h3"
                         className="flex justify-center mb-1 text-lg font-medium leading-6 text-white"
@@ -111,8 +110,8 @@ const Page4 = () => {
                         </svg>
                         Graf
                       </Dialog.Title>
-                      <div className="opacity-0 animate-appearanceInp mt-2">
-                        <div className=' bg-white rounded-lg overflow-hidden transition-all duration-500 p-2'>
+                      <div className=" mt-2">
+                        <div className=' bg-slate-900	 rounded-lg p-2 '>
                           <LineChart chartData={chartData} /> 
                         </div>
                       </div>
