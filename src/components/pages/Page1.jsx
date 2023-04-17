@@ -1,6 +1,6 @@
 import Header from '../Header/Header'
 import { useState, Fragment } from "react";
-import { Data1 } from '../charts/Data1';
+import { Data1 } from '../charts/MainData';
 import LineChart from '../charts/LineChart';
 import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
