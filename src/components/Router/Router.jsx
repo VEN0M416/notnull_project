@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import  Main  from '../pages/Main.jsx';
 import Page1 from "../pages/Page1.jsx";
 import Page2 from "../pages/Page2.jsx";
@@ -8,7 +8,7 @@ import NotFoundPage from "../pages/NotFoundPage.jsx";
 import ChatPage from "../pages/ChatPage.jsx";
 import { useCookies } from 'react-cookie';
 import Profile from "../pages/Profile.jsx";
-
+import Unauthorized from "../pages/UnAuthorized.jsx";
 
 
 function Router() {
@@ -24,8 +24,9 @@ function Router() {
         <Route path='/Page4' element={<Page4/> } />
         <Route path='/profile' element={<Profile/>} />
         <Route path="/*" element={<NotFoundPage/>}/>
-
-        {cookies.sessionId && <Route path="/chat" element={<ChatPage/>}/>}
+        <Route path='/401error' element={<Unauthorized/>} />
+        <Route path='/chat' element={cookies.sessionId ? <ChatPage /> : <Navigate to='/401error' replace />} />
+        <Route path='/profile' element={cookies.sessionId ? <Profile /> : <Navigate to='/401error' replace />} />
       </Routes>
     </BrowserRouter>
   );

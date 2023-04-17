@@ -7,7 +7,7 @@ import { useCookies } from 'react-cookie';
 const InputStyle=' flex w-full my-4 p-3 pl-9 rounded-[10px] bg-gray-100 placeholder:text-black/50 placeholder:font-light placeholder:text-xl';
 
 
-export default function SignUpLogInForm() {
+export default function SignUpLogInForm({buttonColor}) {
 
     const [cookies, setCookie] = useCookies(['sessionId','username']);
     const [PassWrong ,setPassWrong] = useState(false);
@@ -99,7 +99,7 @@ export default function SignUpLogInForm() {
                 openModal();
                 setTypeForm(true);
             }}
-            className="hover:bg-hoverBg rounded-[10px] py-1 px-4 mx-1 active:bg-activeBg"
+            className={`${buttonColor} ${buttonColor ? 'hover:bg-blue-700':'hover:bg-hoverBg'}  rounded-[10px] py-1 px-4 mx-1 active:bg-activeBg`}
             >Sign Up</button>
             <button
             type="button"
@@ -107,7 +107,7 @@ export default function SignUpLogInForm() {
                 openModal();
                 setTypeForm(false);
             }}
-            className="hover:bg-hoverBg rounded-[10px] py-1 px-4 mx-1 active:bg-activeBg"
+            className={`${buttonColor} ${buttonColor ? 'hover:bg-blue-700':'hover:bg-hoverBg'} hover:bg-hoverBg rounded-[10px] py-1 px-4 mx-1 active:bg-activeBg`}
             >Log In</button>
         </div>
 
