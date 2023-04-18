@@ -24,7 +24,7 @@ function Router() {
         <Route path='/Page4' element={<Page4/> } />
         <Route path='/profile' element={<Profile/>} />
         <Route path="/*" element={<NotFoundPage/>}/>
-        <Route path='/401error' element={<Unauthorized/>} />
+        <Route path='/401error' element={cookies.sessionId ? <Navigate to='/' replace /> : <Unauthorized />} />
         <Route path='/chat' element={cookies.sessionId ? <ChatPage /> : <Navigate to='/401error' replace />} />
         <Route path='/profile' element={cookies.sessionId ? <Profile /> : <Navigate to='/401error' replace />} />
       </Routes>
