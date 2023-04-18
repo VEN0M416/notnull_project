@@ -31,7 +31,7 @@ const Header= () =>{
             {
               (cookies.sessionId)? (
                 <div className='flex items-center'>
-                  <div className='mx-2'>Signed in as:{" "+cookies.username}</div>
+                  <div className='mx-2'><Link to="/profile" className={LnkStyle}>{" "+cookies.username}</Link></div>
                   <LogOutForm/>
                   <DropLink/>
                 </div>
