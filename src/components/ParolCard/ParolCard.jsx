@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PhoneInput from 'react-phone-input-2'
+import MaskInput from 'react-maskinput';
 import 'react-phone-input-2/lib/style.css'
 
 const inputStyle = 'bg-white/20 rounded placeholder:text-white text-white px-3 py-1'
@@ -11,7 +11,21 @@ const ParolForm = () => {
         parol: "",
         phone: ""
       })
-const [phoneNumber, setPhoneNumber] = useState('');
+
+      const handlePhoneChange = (e) => {
+        let input = e.target.value;
+           // Удаляем все, кроме цифр из ввода
+            input = input.replace(/[^\d]/g, "");
+            // Применяем маску для ввода номера телефона
+            if (input.length <= 10) {
+              input = input.replace(/^(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2}).*/, (_, p1, p2, p3, p4) => {
+                return `+7 (${p1}${p2 ? ") " + p2 : ""}${p3 ? "-" + p3 : ""}${p4 ? "-" + p4 : ""}`;
+              });
+            } else {
+              input = `+7 (${input.slice(0, 3)}) ${input.slice(3, 6)}-${input.slice(6, 8)}-${input.slice(8, 10)}`;
+            }
+        setParols({...parols, phone: input});
+      };
 
   return (
     <div className="rounded px-12 pb-8 mx-2">
@@ -45,26 +59,11 @@ const [phoneNumber, setPhoneNumber] = useState('');
         {/* <input
             className={inputStyle}
             id="phone"
-            type="tel"
-            placeholder="Введите номер телефона"
+            placeholder="+7 (___) ___-__-__"
             value={parols.phone} 
-            onChange={(e)=>setParols({...parols, phone: e.target.value})}
+            onChange={handlePhoneChange}
         /> */}
-        <PhoneInput
-            country={'ru'}
-            value={phoneNumber}
-            onChange={(value) => {
-                // Функция-обработчик изменения номера телефона
-                setPhoneNumber(value);
-              }}
-              inputStyle={{
-                // Стили для ввода номера телефона
-                border: '1px solid #e2e8f0',
-                borderRadius: '.25rem',
-                outline: 'none',
-                color: "black",
-              }}
-        />
+        <MaskInput className={inputStyle} value={parols.phone} alwaysShowMask mask={'+7 (000) 000 - 00-00'} size={20} showMask maskChar="_" onChange={(e)=>setParols({...parols, phone: e.target.value})} />
         <br/>
         <button 
             className="my-3 rounded border border-white p-1"

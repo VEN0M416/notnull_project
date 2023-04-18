@@ -84,7 +84,7 @@ const BankForm = () => {
       </div>
       <br/>
       <button 
-        className="mx-5 px-3 border color-white rounded"
+        className="my-3 w-full rounded bg-cyan-800 border-white p-1 hover:bg-cyan-900 rounded-[10px] py-1 px-4 active:bg-cyan-950"
         onClick={()=>{
           console.log(bank);
         }}

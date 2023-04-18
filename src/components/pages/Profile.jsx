@@ -3,10 +3,15 @@ import { Tab } from '@headlessui/react';
 import ProfileForm from '../ProfileCard/ProfileCard';
 import ParolForm from '../ParolCard/ParolCard';
 import BankForm from '../BankCard/BankCard';
+import { useState } from 'react';
 
 const tabStyle = "mt-1 px-3 py-6 text-gray-400 leading-5 rounded-md focus:outline-none focus:text-white focus:bg-gray-700 hover:text-white hover:bg-gray-700"
 
 const Profile = () =>{
+  const [personal, setPersonal] = useState()
+  const [security, setSecurity] = useState()
+  const [bank, setBank] = useState()
+
     return (
     <>
       <Header/>

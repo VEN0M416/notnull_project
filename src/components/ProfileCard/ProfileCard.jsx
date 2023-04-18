@@ -14,7 +14,7 @@ const ProfileForm = () => {
   })
 
   return (
-    <div className="flex mx-1">
+    <div className="flex mx-1 rounded bg-violet-300">
       <div className="mx-2 items-center justify-center">
         <p>Имя</p>
         <input placeholder='Имя'
@@ -37,7 +37,7 @@ const ProfileForm = () => {
         ></input>
         <br/>
         <button 
-          className="my-3 rounded border border-white p-1"
+          className="my-3 rounded bg-cyan-800 border-white p-1 hover:bg-cyan-900 rounded-[10px] py-1 px-4 active:bg-cyan-950"
           onClick={()=>{
             console.log(user);
 
