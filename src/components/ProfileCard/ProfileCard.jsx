@@ -57,7 +57,7 @@ const ProfileForm = () => {
         <input type="date" 
           id="meeting-time"
           name="meeting-time" defaultValue="2003-03-12"
-          className={inputStyle}
+          className={inputStyle + " [color-scheme:dark]"}
           value={user.bdate}
           onChange={(e)=>setUser({...user, bdate: e.target.value})} 
         ></input>  

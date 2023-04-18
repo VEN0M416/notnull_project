@@ -65,10 +65,10 @@ const Page3 = () =>{
                       />
                       <p>Дата рождения</p>
                       <input 
-                        type="date" 
+                        type='date' 
                         id="meeting-date"
                         name="meeting-date"
-                        className={inputStyle+" dark:[color-scheme:dark]"}
+                        className={inputStyle+" [color-scheme:dark]"}
                       />
                     </div>
                   </div>
