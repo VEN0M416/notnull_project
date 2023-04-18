@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Particle from '../../background/Particle';
 import SignUpLogInForm from '../Forms/SignUpLogInForm';
 import { useCookies } from 'react-cookie';
-import LogOutForm from '../Forms/LogOutForm';
 import DropLink from '../DropLink/DropLink';
 
 
@@ -31,8 +30,7 @@ const Header= () =>{
             {
               (cookies.sessionId)? (
                 <div className='flex items-center'>
-                  <div className='mx-2'><Link to="/profile" className={LnkStyle}>{" "+cookies.username}</Link></div>
-                  <LogOutForm/>
+                  <div className='mx-2'><Link to="/profile" className='mx-3'>{" "+cookies.username}</Link></div>
                   <DropLink/>
                 </div>
               ) : (

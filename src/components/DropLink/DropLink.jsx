@@ -27,29 +27,19 @@ export default function DropLink() {
           <Menu.Items className="absolute right-0 mt-2 w-30 origin-top-right divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 border focus:outline-none">
             <div className="px-1 py-1 ">
               <Menu.Item>
-                {({ active }) => (
+                {() => (
                   <Link to="/profile" >
                     <button
-                        className={`${
-                        active ? 'bg-violet-500 text-white' : 'text-white'
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                        
+                      className='hover:bg-violet-500 text-white group flex w-full items-center rounded-md px-2 py-2 text-sm my-1'
                     >
-                        Редактировать
+                      Редактировать
                     </button>
                   </Link>
                 )}
               </Menu.Item>
               <Menu.Item>
-                {({ active }) => (
-                  // <button
-                  //   className={`${
-                  //     active ? 'bg-violet-500 text-white' : 'text-white'
-                  //   } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  // >
-                  //   Выйти
-                  // </button>
-                  <LogOutForm/>
+                {() => (
+                  <LogOutForm />
                 )}
               </Menu.Item>
             </div>

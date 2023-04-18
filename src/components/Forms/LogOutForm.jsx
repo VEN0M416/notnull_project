@@ -24,8 +24,8 @@ export default function LogOutForm() {
             <button
             type="button"
             onClick={send}
-            className="hover:bg-hoverBg rounded-[10px] py-1 px-4  active:bg-activeBg"
-            >Log Out</button>
+            className='hover:bg-violet-500 text-white group flex w-full items-center rounded-md px-2 py-2 text-sm my-1'
+            >Выйти</button>
         </div>
         </>
     )
