@@ -1,12 +1,5 @@
 import React, { useRef, useState } from "react";
 
-const handleInputChange = (e, ref) => {
-  const input = e.target;
-  if (input.value.length === input.maxLength) {
-    ref.current.focus();
-  }
-};
-
 const BankForm = () => {
     //Проверка переноса строк
     const cardNumberRef = useRef();
@@ -36,7 +29,7 @@ const BankForm = () => {
         id="card"
         placeholder="1234567890123456"
         type="number"
-        maxLength={16}
+        maxLength={19}
         value={bank.number}
         onChange={(e) => {
           handleInputChange(e, cardHolderRef)
