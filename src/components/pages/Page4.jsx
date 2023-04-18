@@ -1,41 +1,26 @@
 import Header from '../Header/Header'
 import { useState, Fragment } from "react";
-import { Data1 } from '../charts/MainData';
-import LineChart from '../charts/LineChart';
 import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useTimeoutFn } from 'react-use';
+import { ChartList } from '../charts/ChartList';
+import { SharesList } from '../charts/SharesList';
 
 const Page4 = () => {
-  const [chartData, setChartData] = useState({
-    labels: Data1[0].chartPrice.map((data) => data.date),
-    datasets: [{
-      label: "Сбербанк",
-      data: Data1[0].chartPrice.map((data) => data.price),
-    }]
-  });
-
-  const lastData = Data1[0].chartPrice.slice(-1)[0];
-
-  const thStyle = 'py-3 px-10';
-  const trStyle = 'py-1 px-10';
-  /*   const [showChart1, setShowChart1] = useState(false);
-    const [showChart2, setShowChart2] = useState(false); */
-
-  /* -------------------------------------------------------------------- */
+  const [chartNum, setChartNum] = useState(-1);
   let [isOpen, setIsOpen] = useState(false)
 
   function closeModal() {
-    setIsOpen(false);
+    setIsOpen(false)
   }
 
   function openModal() {
     setIsOpen(true);
   }
 
-  let [crossPointer, setCrosPtr] = useState(false);
+  let [crossPointer, ] = useState(false);
 
-  let [, , resetIsShowing] = useTimeoutFn(() => crossPointer ? setIsOpen(true) : setIsOpen(false), 500)
+  let [, , ] = useTimeoutFn(() => crossPointer ? setIsOpen(true) : setIsOpen(false), 500)
 
   return (
     <>
@@ -45,29 +30,9 @@ const Page4 = () => {
         <p className='text-2xl pt-[50px]'>Page4</p>
 
         <div className='bg-cyan-900 my-5 p-1 w-max rounded-lg text-white relative'>
-          <table className='table-auto'>
-            <thead className='bg-cyan-900 font-medium '>
-              <tr>
-                <th className={thStyle}>Bank</th>
-                <th className={thStyle}>CurDate</th>
-                <th className={thStyle}>CurValue, ₽</th>
-                <th className={thStyle}>changAll, %</th>
-                <th className={thStyle}>changAll, ₽</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                className='text-center bg-cyan-950 hover:bg-white/10 cursor-pointer border-2 border-cyan-900'
-                onClick={openModal}
-              >
-                <td className={trStyle}>{Data1[0].name}</td>
-                <td className={trStyle}>{lastData.date}</td>
-                <td className={trStyle}>{lastData.price}</td>
-                <td className={trStyle}>{Data1[0].changeOnRercent}</td>
-                <td className={trStyle}>{Data1[0].changeOnValue}</td>
-              </tr>
-            </tbody>
-          </table>
+
+          <SharesList openModal={openModal} onData={(i)=>{setChartNum(i)}}/>{/* table */}
+
           <Transition appear show={isOpen} as={Fragment}>
             <Dialog as="div" className="relative z-10" onClose={closeModal}>
               <Transition.Child
@@ -111,9 +76,9 @@ const Page4 = () => {
                         Graf
                       </Dialog.Title>
                       <div className=" mt-2">
-                        <div className=' bg-slate-900	 rounded-lg p-2 '>
-                          <LineChart chartData={chartData} /> 
-                        </div>
+
+                        <ChartList num = {chartNum}/>{/* chart */}
+
                       </div>
                     </Dialog.Panel>
                   </Transition.Child>
