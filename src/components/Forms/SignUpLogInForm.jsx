@@ -30,15 +30,16 @@ export default function SignUpLogInForm({buttonColor}) {
         }   
         api.post('/authorisation/registration',{username: user.name, password: user.password}).then((res)=>{
             if(res.data.status === 'done'){
-                closeModal();
-                /* setCookie('sessionId', res.data.sessionId, { path: '/', sameSite: 'Lax' });
-                setCookie('username', user.name, { path: '/', sameSite: 'Lax' }); */
-                setUser({name: "", password: ""})
+                api.post('/authorisation/login',{username: user.name, password: user.password}).then((res)=>{
+                    setCookie('sessionId', res.data.sessionId, { path: '/', sameSite: 'Lax' });
+                    setCookie('username', user.name, { path: '/', sameSite: 'Lax' });
+                    closeModal();
+                    setUser({name: "", password: ""});
+                });
             } else if(res.data.status === 'user already exists'){
                 setAlreadyReg(true);
                 return;
-            }
-            
+            }          
         });
         
     }
