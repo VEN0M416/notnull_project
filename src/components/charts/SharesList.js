@@ -33,7 +33,7 @@ export const SharesList=({openModal, onData})=>{
                     }</td>
                     <td className={trStyle}>{lastData.date}</td>
                     <td className={trStyle}>{lastData.price}</td>
-                    <td className={trStyle}>{Data1[i].changeOnRercent}</td>
+                    <td className={trStyle}>{Data1[i].changeOnPercent}</td>
                     <td className={trStyle}>{Data1[i].changeOnValue}</td>
                 </tr>
             );

@@ -1,7 +1,8 @@
 export const Data1 = [
     {
         name : "Сбербанк",
-        changeOnRercent : 110,
+        ticket: "SBER",
+        changeOnPercent : 110,
         changeOnValue : 2.1,
         chartPrice : [
             {
@@ -32,7 +33,8 @@ export const Data1 = [
     },
     {
         name: "ВТБ",
-        changeOnRercent : 180,
+        ticket: "VTBR",
+        changeOnPercent : 180,
         changeOnValue : 1.5,
         chartPrice : [
             {
@@ -63,7 +65,8 @@ export const Data1 = [
     },
     {
         name: "Росбанк",
-        changeOnRercent : 35,
+        ticket: "ROSB",
+        changeOnPercent : 35,
         changeOnValue : 0.35,
         chartPrice : [
             {
@@ -94,7 +97,8 @@ export const Data1 = [
     },
     {   
         name: "Авангрд",
-        changeOnRercent : -40,
+        ticket: "AVAN",
+        changeOnPercent : -40,
         changeOnValue : -1.2, 
         chartPrice : [
             {
@@ -125,7 +129,8 @@ export const Data1 = [
     },
     {
         name: "Тинькофф",
-        changeOnRercent : 760,
+        ticket: "TCSG",
+        changeOnPercent : 760,
         changeOnValue : 3.3,
         chartPrice : [
             {
