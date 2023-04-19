@@ -22,7 +22,6 @@ function Router() {
         <Route path='/stocks' element={<StocksPage/>} />
         <Route path='/Page2' element={<Page2/> } />
         <Route path='/Page3' element={<Page3/> } />
-        <Route path='/Page4' element={<Page4/> } />
         <Route path='/stocks/:symbol' element={<StockPage/>}/>
         <Route path='/profile' element={<Profile/>} />
         <Route path="/*" element={<NotFoundPage/>}/>
