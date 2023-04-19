@@ -8,22 +8,22 @@ import { api } from "../../core/api";
 
 function ChatPage () {
     const [cookies, setCookie] = useCookies(['username']);
-    const stompClient = useRef(null);
+    const stompClient = useRef(null); // ссылка но зачем уже не помню
 
-    const [connection, setConnection] = useState(true);
-    const [currentMessage, setCurrentMessage] = useState("");
+    const [connection, setConnection] = useState(true); // подключены ли мы 
+    const [currentMessage, setCurrentMessage] = useState(""); // отправляемое сообщение
     
-    const [chatHistory, setChatHistory] = useState([]);
+    const [chatHistory, setChatHistory] = useState([]); // все сообщения чата
 
     const myName = cookies.username;
 
-    const onConnected =()=>{
+    const onConnected =()=>{ // подключаемся)))
         console.log('WS connected');
         stompClient.current.subscribe('/chatroom/public', chatMessages);
         setConnection(true);
     };
 
-    const chatMessages = (payload) => {
+    const chatMessages = (payload) => { // слушаем сервер и добавляем в chatHistory
         console.log(payload);
         const payloadData = JSON.parse(payload.body);
         console.log(payloadData);
@@ -37,7 +37,7 @@ function ChatPage () {
         );
     };    
 
-    const sendMessage=()=>{
+    const sendMessage=()=>{ // угадай по названию 
         if(stompClient.current !== null) {
             if (currentMessage.trim() !== "") {
                 const newDate = new Date();
@@ -52,7 +52,7 @@ function ChatPage () {
         }
     };
 
-    const onError =()=>{
+    const onError =()=>{ // ничего не работает 
         console.log('WS error');
         setConnection(false);
     };
@@ -60,14 +60,14 @@ function ChatPage () {
     useEffect(() => { //подключаемся / отключаемся
         stompClient.current = over(new SockJS('http://localhost:8082/ws'));
         stompClient.current.connect({}, onConnected, onError); 
-        getHistoryOfChat();
+        getHistoryOfChat(); // первичная загрузка сообщений (не помню)
 
         return () => { // выполняется при размонтировании компонента
             stompClient.current && stompClient.current.disconnect();
         };
     }, []);
 
-    const handleKeyDown = (event) => {
+    const handleKeyDown = (event) => { // отправка при нажатии Enter
         if (event.key === "Enter") {
           sendMessage();
         }
@@ -99,7 +99,7 @@ function ChatPage () {
         })
     }
     
-    const chatEndRef = useRef(null); // ссылка на конец чата 
+    const chatEndRef = useRef(null); // ссылка на конец чата для скрола
 
     // Обновляем скролл до конца чата каждый раз, когда добавляется новое сообщение
     useEffect(() => {
@@ -137,15 +137,15 @@ function ChatPage () {
                                 </div>
                             </div>)
                         ))}
-                        <div ref={chatEndRef} />
+                        <div ref={chatEndRef} /> {/* ссылка на конец чата */}
                     </div>
-                    {!connection && (<div className="text-center text-red-500">Чат сломался :(</div>)}
+                    {!connection && (<div className="text-center text-red-500">Чат сломался :(</div>)} {/* если connection = false */}
                 </div>
                 <div className="flex flex-row items-center h-16 rounded-xl bg-[#314f71] bg-transparent w-full px-4" >
 
                     <div className="flex-grow ml-4">
                         <div className="relative w-full">
-                            <input
+                            <input /* ввод сообщения */
                             onKeyDown={handleKeyDown}
                             value={currentMessage}
                             onChange={(e)=>setCurrentMessage(e.target.value)}
@@ -156,7 +156,7 @@ function ChatPage () {
                     </div>
 
                     <div className="ml-4">
-                        <button 
+                        <button /* кнопка отправить */
                             className="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0"
                             onClick={sendMessage}
                             >
