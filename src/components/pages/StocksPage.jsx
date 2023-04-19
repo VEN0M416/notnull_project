@@ -62,7 +62,7 @@ const StocksPage = () => {
                   <td className="py-2 text-right">{parseFloat(stock.chartPrice.slice(-1)[0].price).toFixed(2)} $</td>
                   <td className='py-2 grid grid-rows'>
                     <div className={`text-right ${stock.changeOnValue >= 0 ? 'text-green-500' : 'text-red-400'}`}>{stock.changeOnValue.toFixed(2)} $</div>
-                    <div className={`text-sm text-right ${stock.percentChange >= 0 ? 'text-green-500' : 'text-red-400'}`}>{stock.changeOnPercent.toFixed(2)}%</div>
+                    <div className={`text-sm text-right ${stock.changeOnPercent >= 0 ? 'text-green-500' : 'text-red-400'}`}>{stock.changeOnPercent.toFixed(2)}%</div>
                   </td>
                 </tr>
               ))}
