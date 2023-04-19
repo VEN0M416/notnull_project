@@ -12,7 +12,13 @@ const Profile = () =>{
   const [security, setSecurity] = useState()
   const [bank, setBank] = useState()
 
+  const [activeTab, setActiveTab] = useState('tab1'); // Состояние для отслеживания активной кнопки
+
+  const handleTabClick = (tabId) => {
+    setActiveTab(tabId); // Обновляем состояние активной кнопки при клике на нее
+  };
     return (
+      
     <>
       <Header/>
       <div className='container h-[700px] bg-gray-800/50 backdrop-blur-sm mx-auto text-md mt-5 rounded text-white text-3xl'>
@@ -20,17 +26,17 @@ const Profile = () =>{
           <div className="flex justify-center rounded h-max">
             <div className="rounded w-5/12 py-3 px-4">
               <Tab.List className="flex flex-col">
-                <Tab className={tabStyle}>
-                  Личные данные
-                </Tab>
+              <Tab className={`${tabStyle} ${activeTab === 'tab1' ? 'bg-gray-700' : ''}`} onClick={() => handleTabClick('tab1')} id="tab1">
+                Личные данные
+              </Tab>
 
-                <Tab className={tabStyle}>
-                  Безопасность и пароли
-                </Tab>
+              <Tab className={`${tabStyle} ${activeTab === 'tab2' ? 'bg-gray-700' : ''}`} onClick={() => handleTabClick('tab2')} id="tab2">
+                Безопасность и пароли
+              </Tab>
 
-                <Tab className={tabStyle}>
-                  Банковские реквизиты
-                </Tab>
+              <Tab className={`${tabStyle} ${activeTab === 'tab3' ? 'bg-gray-700' : ''}`} onClick={() => handleTabClick('tab3')} id="tab3">
+                Банковские реквизиты
+              </Tab>
               </Tab.List>
             </div>
             <Tab.Panels className="ml-3 rounded w-7/12">
