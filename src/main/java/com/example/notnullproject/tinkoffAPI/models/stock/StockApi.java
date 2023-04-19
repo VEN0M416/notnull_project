@@ -5,7 +5,7 @@ import lombok.Value;
 
 @Value
 @AllArgsConstructor
-public class Stock {
+public class StockApi {
     String ticker;
     String figi;
     String name;

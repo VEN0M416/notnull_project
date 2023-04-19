@@ -4,9 +4,9 @@ import com.example.notnullproject.tinkoffAPI.exception.StockNotFoundException;
 import com.example.notnullproject.tinkoffAPI.models.dto.FigiesDto;
 import com.example.notnullproject.tinkoffAPI.models.dto.StocksPricesDto;
 import com.example.notnullproject.tinkoffAPI.models.stock.Currency;
-import com.example.notnullproject.tinkoffAPI.models.stock.Stock;
 import com.example.notnullproject.tinkoffAPI.models.dto.StocksDto;
 import com.example.notnullproject.tinkoffAPI.models.dto.TickersDto;
+import com.example.notnullproject.tinkoffAPI.models.stock.StockApi;
 import com.example.notnullproject.tinkoffAPI.models.stock.StockPrice;
 import com.example.notnullproject.tinkoffAPI.services.service.StockService;
 import lombok.RequiredArgsConstructor;
@@ -38,14 +38,14 @@ public class StockServiceImpl implements StockService {
         return context.searchMarketInstrumentsByTicker(ticker);
     }
 
-    public Stock getStockByTicker(String ticker) {
+    public StockApi getStockByTicker(String ticker) {
         var cf = getMarketInstrumentTicker(ticker);
         var list = cf.join().getInstruments();
         if (list.isEmpty()) {
             throw new StockNotFoundException(String.format("Stock %S not found.", ticker));
         }
         var item = list.get(0);
-        return new Stock(
+        return new StockApi(
                 item.getTicker(),
                 item.getFigi(),
                 item.getName(),
@@ -57,7 +57,7 @@ public class StockServiceImpl implements StockService {
     public StocksDto getStocksByTickers(TickersDto tickers) {
         List<CompletableFuture<MarketInstrumentList>> marketInstruments = new ArrayList<>();
         tickers.getTickers().forEach(ticker -> marketInstruments.add(getMarketInstrumentTicker(ticker)));
-        List<Stock> stocks =  marketInstruments.stream()
+        List<StockApi> stocks =  marketInstruments.stream()
                 .map(CompletableFuture::join)
                 .map(mi -> {
                     if (!mi.getInstruments().isEmpty()) {
@@ -66,7 +66,7 @@ public class StockServiceImpl implements StockService {
                     return null;
                 })
                 .filter(Objects::nonNull)
-                .map(mi -> new Stock(
+                .map(mi -> new StockApi(
                         mi.getTicker(),
                         mi.getFigi(),
                         mi.getName(),
@@ -86,7 +86,6 @@ public class StockServiceImpl implements StockService {
     }
 
     public StocksPricesDto getPricesStocksByFigies(FigiesDto figiesDto) {
-        long start = System.currentTimeMillis();
         List<CompletableFuture<Optional<Orderbook>>> orderBooks = new ArrayList<>();
         figiesDto.getFigies().forEach(figi -> orderBooks.add(getOrderBookByFigi(figi)));
         List<StockPrice> prices =  orderBooks.stream()
@@ -95,8 +94,6 @@ public class StockServiceImpl implements StockService {
                 .map(orderBook -> new StockPrice(
                         orderBook.getFigi(),
                         orderBook.getLastPrice().doubleValue())).collect(Collectors.toList());
-
-        log.info("Time getting prices - {}", System.currentTimeMillis() - start);
         return new StocksPricesDto(prices);
     }
 

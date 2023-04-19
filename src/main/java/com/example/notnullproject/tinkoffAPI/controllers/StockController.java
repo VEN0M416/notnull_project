@@ -4,7 +4,7 @@ import com.example.notnullproject.tinkoffAPI.models.dto.FigiesDto;
 import com.example.notnullproject.tinkoffAPI.models.dto.StocksDto;
 import com.example.notnullproject.tinkoffAPI.models.dto.StocksPricesDto;
 import com.example.notnullproject.tinkoffAPI.models.dto.TickersDto;
-import com.example.notnullproject.tinkoffAPI.models.stock.Stock;
+import com.example.notnullproject.tinkoffAPI.models.stock.StockApi;
 import com.example.notnullproject.tinkoffAPI.services.service.StockService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class StockController {
     private StockService stockService;
 
     @GetMapping("/stocks/{ticker}")
-    public Stock getStock(@PathVariable String ticker){
+    public StockApi getStock(@PathVariable String ticker){
         return stockService.getStockByTicker(ticker);
     }
 

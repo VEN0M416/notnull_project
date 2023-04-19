@@ -1,6 +1,6 @@
 package com.example.notnullproject.tinkoffAPI.models.dto;
 
-import com.example.notnullproject.tinkoffAPI.models.stock.Stock;
+import com.example.notnullproject.tinkoffAPI.models.stock.StockApi;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,5 +13,5 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StocksDto {
-    List<Stock> stocks;
+    List<StockApi> stocks;
 }
