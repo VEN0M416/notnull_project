@@ -2,7 +2,7 @@ export const DataStocks = [
     {
         name : "Сбербанк",
         ticket: "SBER",
-        changeOnPercent : 110,
+        changeOnPercent : 1.10,
         changeOnValue : 2.1,
         chartPrice : [
             {
@@ -34,7 +34,7 @@ export const DataStocks = [
     {
         name: "ВТБ",
         ticket: "VTBR",
-        changeOnPercent : 180,
+        changeOnPercent : 18.0,
         changeOnValue : 1.5,
         chartPrice : [
             {
@@ -66,7 +66,7 @@ export const DataStocks = [
     {
         name: "Росбанк",
         ticket: "ROSB",
-        changeOnPercent : 35,
+        changeOnPercent : 3.5,
         changeOnValue : 0.35,
         chartPrice : [
             {
@@ -98,7 +98,7 @@ export const DataStocks = [
     {   
         name: "Авангрд",
         ticket: "AVAN",
-        changeOnPercent : -40,
+        changeOnPercent : -0.40,
         changeOnValue : -1.2, 
         chartPrice : [
             {
@@ -130,7 +130,7 @@ export const DataStocks = [
     {
         name: "Тинькофф",
         ticket: "TCSG",
-        changeOnPercent : 760,
+        changeOnPercent : 7.60,
         changeOnValue : 3.3,
         chartPrice : [
             {
