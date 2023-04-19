@@ -3,7 +3,6 @@ import  Main  from '../pages/Main.jsx';
 import StocksPage from "../pages/StocksPage.jsx";
 import Page2 from "../pages/Page2.jsx";
 import Page3 from "../pages/Page3.jsx";
-import Page4 from "../pages/Page4.jsx";
 import NotFoundPage from "../pages/NotFoundPage.jsx";
 import ChatPage from "../pages/ChatPage.jsx";
 import { useCookies } from 'react-cookie';
