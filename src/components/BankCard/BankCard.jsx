@@ -22,26 +22,28 @@ const BankForm = () => {
   };
 
   return (
-    <div className="text-white my-3 px-12 pb-8 mx-2">
-      <p className='font-md my-1'>Введите номер карты</p>
-      <input
-        className='bg-white/20 rounded placeholder:text-white text-white p-1.5'
-        id="card"
-        placeholder="1234567890123456"
-        type="number"
-        maxLength={19}
-        value={bank.number}
-        onChange={(e) => {
-          handleInputChange(e, cardHolderRef)
-          setBank({...bank, number: e.target.value})
-        }}
-        ref={cardNumberRef}
-      />
-      <div className='flex space-x-4'>
-        <div>
-          <p>Месяц/Год</p>
+    <div className="text-white px-12 pb-8 container w-7/12 bg-gray-800 rounded">
+      <div className="flex-column w-full justify-center mb-3">
+        <p className='text-xl my-1 w-full'>Введите номер карты</p>
+        <input
+          className='bg-white/20 rounded placeholder:text-white text-white p-1.5 w-full'
+          id="card"
+          placeholder="1234567890123456"
+          type="number"
+          maxLength={19}
+          value={bank.number}
+          onChange={(e) => {
+            handleInputChange(e, cardHolderRef)
+            setBank({...bank, number: e.target.value})
+          }}
+          ref={cardNumberRef}
+        />
+      </div>
+      <div className='flex justify-between'>
+        <div className="flex-column">
+          <p className='text-xl my-1 w-full'>Месяц/Год</p>
           <input
-            className='bg-white/20 rounded placeholder:text-white text-white p-1.5 w-[70px]'
+            className='bg-white/20 rounded placeholder:text-white mr-1 text-white p-1.5 w-[70px]'
             id="month"
             placeholder='MM'
             type="text"
@@ -55,7 +57,7 @@ const BankForm = () => {
           />
           /
           <input
-            className='bg-white/20 rounded placeholder:text-white text-white p-1.5 w-[70px]'
+            className='bg-white/20 rounded placeholder:text-white text-white ml-1 p-1.5 w-[70px]'
             id="year"
             placeholder='YY'
             type="text"
@@ -68,8 +70,9 @@ const BankForm = () => {
             ref={expiryDateRef1}
           />
         </div>
-        <div className='mx-2'>
-          <p >CVV</p>
+
+        <div className="flex-column">
+          <p className='text-xl my-1 w-full'>CVV</p>
           <input
             className='bg-white/20 rounded placeholder:text-white text-white p-1.5 w-[110px]'
             id="CVV"
@@ -83,12 +86,14 @@ const BankForm = () => {
         </div>
       </div>
       <br/>
-      <button 
-        className="my-3 w-full rounded bg-cyan-800 border-white p-1 hover:bg-cyan-900 rounded-[10px] py-1 px-4 active:bg-cyan-950"
-        onClick={()=>{
-          console.log(bank);
-        }}
-      > Подтвердить</button>
+      <div className="flex justify-center w-full">
+        <button 
+          className="my-3 w-full bg-cyan-800 border-white p-1 hover:bg-cyan-900 rounded-[10px] py-1 px-4 active:bg-cyan-950"
+          onClick={()=>{
+            console.log(bank);
+          }}
+        > Подтвердить</button>
+      </div>
     </div>
   );
 };

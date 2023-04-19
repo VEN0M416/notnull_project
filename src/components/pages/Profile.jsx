@@ -8,9 +8,6 @@ import { useState } from 'react';
 const tabStyle = "mt-1 px-3 py-6 text-gray-400 leading-5 rounded-md focus:outline-none focus:text-white focus:bg-gray-700 hover:text-white hover:bg-gray-700"
 
 const Profile = () =>{
-  const [personal, setPersonal] = useState()
-  const [security, setSecurity] = useState()
-  const [bank, setBank] = useState()
 
   const [activeTab, setActiveTab] = useState('tab1'); // Состояние для отслеживания активной кнопки
 
@@ -21,7 +18,7 @@ const Profile = () =>{
       
     <>
       <Header/>
-      <div className='container h-[700px] bg-gray-800/50 backdrop-blur-sm mx-auto text-md mt-5 rounded text-white text-3xl'>
+      <div className='container h-[500px] bg-gray-800/50 backdrop-blur-sm mx-auto text-md mt-5 rounded text-white text-3xl'>
         <Tab.Group vertical >
           <div className="flex justify-center rounded h-max">
             <div className="rounded w-5/12 py-3 px-4">

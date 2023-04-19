@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import GenderSelect from "../GenderSelect/GenderSelect";
 
-const inputStyle = 'bg-white/20 rounded placeholder:text-white text-white px-3 py-1'
-
+const inputStyle = "my-1 bg-white/20 rounded px-3 py-1"
+const pStyle = "text-xl text-slate-300"
 const ProfileForm = () => {
-  
+  const [focus, setFocus]=useState(false)
   const [user, setUser]=useState({
     name:"",
     lastname:"",
@@ -14,22 +14,22 @@ const ProfileForm = () => {
   })
 
   return (
-    <div className="flex mx-1 rounded bg-violet-300">
+    <div className="flex m-3 rounded bg-[#354555d1] backdrop-blur-sm juctify-center">
       <div className="mx-2 items-center justify-center">
-        <p>Имя</p>
-        <input placeholder='Имя'
+        <p className={pStyle}>Имя</p>
+        <input placeholder='Имя' 
           className={inputStyle}
           value = {user.name}
           onChange={(e)=>setUser({...user, name: e.target.value})} 
         ></input>
 
-        <p>Пол</p>
+        <p className={pStyle}>Пол</p>
         <GenderSelect
         onChange={(e)=>setUser({...user, gender: e})}
         
         />
         
-        <p>Никнейм</p>
+        <p className={pStyle}>Никнейм</p>
         <input placeholder="никнейм" 
           className={inputStyle} 
           value={user.nickname} 
@@ -37,7 +37,7 @@ const ProfileForm = () => {
         ></input>
         <br/>
         <button 
-          className="my-3 rounded bg-cyan-800 border-white p-1 hover:bg-cyan-900 rounded-[10px] py-1 px-4 active:bg-cyan-950"
+          className="my-3 bg-cyan-800 border-white p-1 hover:bg-cyan-900 rounded-[10px] py-1 px-4 active:bg-cyan-950"
           onClick={()=>{
             console.log(user);
 
@@ -46,18 +46,19 @@ const ProfileForm = () => {
       </div>
 
       <div className="mx-3 items-center justify-center">
-        <p>Фамилия</p>
+        <p className={pStyle}>Фамилия</p>
         <input placeholder='Фамилия' 
           className={inputStyle}
           value={user.lastname} 
           onChange={(e)=>setUser({...user, lastname: e.target.value})}                     
         ></input>
 
-        <p>Дата рождения</p>
+        <p className={pStyle}>Дата рождения</p>
         <input type="date" 
           id="meeting-time"
-          name="meeting-time" defaultValue="2003-03-12"
-          className={inputStyle + " [color-scheme:dark]"}
+          name="meeting-time"
+          onFocus={()=>setFocus(true)}
+          className={inputStyle + ` [color-scheme:dark] ${focus?"text-white":"text-gray-400"}`}
           value={user.bdate}
           onChange={(e)=>setUser({...user, bdate: e.target.value})} 
         ></input>  
