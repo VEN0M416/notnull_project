@@ -1,4 +1,4 @@
-import { Data1 } from './MainData';
+import { DataStocks } from './MainData';
 import React from 'react';
 import { useState, useEffect } from 'react';
 
@@ -10,14 +10,14 @@ export const SharesList=({openModal, onData})=>{
 
     const TrList=()=>{
         let trlist=[];
-        for(let i = 0; i < Data1.length ; i++){
-            let lastData = Data1[i].chartPrice.slice(-1)[0];
+        for(let i = 0; i < DataStocks.length ; i++){
+            let lastData = DataStocks[i].chartPrice.slice(-1)[0];
             trlist[i]=(
                 <tr
                 key={i}
                 className='text-center bg-cyan-950 hover:bg-white/10 border-2 border-cyan-900'
                 >
-                    <td className={trStyle}>{Data1[i].name}</td>
+                    <td className={trStyle}>{DataStocks[i].name}</td>
                     <td className='grid place-items-center py-1 px-10 h-[34px]'>{
                         <svg 
                             xmlns="http://www.w3.org/2000/svg" 
@@ -33,8 +33,8 @@ export const SharesList=({openModal, onData})=>{
                     }</td>
                     <td className={trStyle}>{lastData.date}</td>
                     <td className={trStyle}>{lastData.price}</td>
-                    <td className={trStyle}>{Data1[i].changeOnRercent}</td>
-                    <td className={trStyle}>{Data1[i].changeOnValue}</td>
+                    <td className={trStyle}>{DataStocks[i].changeOnPercent}</td>
+                    <td className={trStyle}>{DataStocks[i].changeOnValue}</td>
                 </tr>
             );
         }

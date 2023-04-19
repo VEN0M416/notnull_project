@@ -19,7 +19,7 @@ const Header= () =>{
         <div className='flex justify-between place-items-center'>
           <div className='space-x-2'>
             <Link to="/" className={LnkStyle}>Main</Link>
-            <Link to="/Page1" className={LnkStyle}>Page1</Link>
+            <Link to="/stocks" className={LnkStyle}>Акции</Link>
             <Link to="/Page2" className={LnkStyle}>Page2</Link>
             <Link to="/Page3" className={LnkStyle}>Page3</Link>
             <Link to="/Page4" className={LnkStyle}>Page4</Link>

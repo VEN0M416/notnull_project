@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import  Main  from '../pages/Main.jsx';
-import Page1 from "../pages/Page1.jsx";
+import StocksPage from "../pages/StocksPage.jsx";
 import Page2 from "../pages/Page2.jsx";
 import Page3 from "../pages/Page3.jsx";
 import Page4 from "../pages/Page4.jsx";
@@ -9,6 +9,7 @@ import ChatPage from "../pages/ChatPage.jsx";
 import { useCookies } from 'react-cookie';
 import Profile from "../pages/Profile.jsx";
 import Unauthorized from "../pages/UnAuthorized.jsx";
+import { StockPage } from "../pages/StockPage.jsx";
 
 
 function Router() {
@@ -18,10 +19,11 @@ function Router() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Main/>} />
-        <Route path='/Page1' element={<Page1/>} />
+        <Route path='/stocks' element={<StocksPage/>} />
         <Route path='/Page2' element={<Page2/> } />
         <Route path='/Page3' element={<Page3/> } />
         <Route path='/Page4' element={<Page4/> } />
+        <Route path='/stocks/:symbol' element={<StockPage/>}/>
         <Route path='/profile' element={<Profile/>} />
         <Route path="/*" element={<NotFoundPage/>}/>
         <Route path='/401error' element={cookies.sessionId ? <Navigate to='/' replace /> : <Unauthorized />} />
