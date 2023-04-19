@@ -1,4 +1,4 @@
-export const Data1 = [
+export const DataStocks = [
     {
         name : "Сбербанк",
         ticket: "SBER",
