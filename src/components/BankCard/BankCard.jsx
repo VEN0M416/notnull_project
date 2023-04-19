@@ -1,5 +1,8 @@
 import React, { useRef, useState } from "react";
 
+const inputStyle = "my-1 bg-white/20 rounded px-3 py-1"
+const pStyle = "text-xl text-slate-300"
+
 const BankForm = () => {
     //Проверка переноса строк
     const cardNumberRef = useRef();
@@ -22,11 +25,11 @@ const BankForm = () => {
   };
 
   return (
-    <div className="text-white px-12 pb-8 container w-7/12 bg-gray-800 rounded">
+    <div className="text-white px-12 pb-8 container w-7/12 bg-[#354555d1] rounded">
       <div className="flex-column w-full justify-center mb-3">
-        <p className='text-xl my-1 w-full'>Введите номер карты</p>
+        <p className={pStyle}>Введите номер карты</p>
         <input
-          className='bg-white/20 rounded placeholder:text-white text-white p-1.5 w-full'
+          className={inputStyle + ' w-full'}
           id="card"
           placeholder="1234567890123456"
           type="number"
@@ -41,9 +44,9 @@ const BankForm = () => {
       </div>
       <div className='flex justify-between'>
         <div className="flex-column">
-          <p className='text-xl my-1 w-full'>Месяц/Год</p>
+          <p className={pStyle}>Месяц/Год</p>
           <input
-            className='bg-white/20 rounded placeholder:text-white mr-1 text-white p-1.5 w-[70px]'
+            className={inputStyle+' w-[70px]'}
             id="month"
             placeholder='MM'
             type="text"
@@ -57,7 +60,7 @@ const BankForm = () => {
           />
           /
           <input
-            className='bg-white/20 rounded placeholder:text-white text-white ml-1 p-1.5 w-[70px]'
+            className={inputStyle+' w-[70px]'}
             id="year"
             placeholder='YY'
             type="text"
@@ -72,9 +75,9 @@ const BankForm = () => {
         </div>
 
         <div className="flex-column">
-          <p className='text-xl my-1 w-full'>CVV</p>
+          <p className={pStyle}>CVV</p>
           <input
-            className='bg-white/20 rounded placeholder:text-white text-white p-1.5 w-[110px]'
+            className={inputStyle + ' w-[110px]'}
             id="CVV"
             type='password'
             placeholder='CVV'

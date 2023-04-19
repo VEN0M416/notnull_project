@@ -2,34 +2,20 @@ import React, { useState } from "react";
 import MaskInput from 'react-maskinput';
 import 'react-phone-input-2/lib/style.css'
 
-const inputStyle = 'bg-white/20 rounded placeholder:text-white text-white px-3 py-1'
-
+const inputStyle = "my-1 bg-white/20 rounded px-3 py-1"
+const pStyle = "text-xl text-slate-300"
 const ParolForm = () => {
-  
-    const [parols, setParols]=useState({
-        mail: "",
-        parol: "",
-        phone: ""
-      })
+  const [focus,setFocus]=useState(false)
 
-      const handlePhoneChange = (e) => {
-        let input = e.target.value;
-           // Удаляем все, кроме цифр из ввода
-            input = input.replace(/[^\d]/g, "");
-            // Применяем маску для ввода номера телефона
-            if (input.length <= 10) {
-              input = input.replace(/^(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2}).*/, (_, p1, p2, p3, p4) => {
-                return `+7 (${p1}${p2 ? ") " + p2 : ""}${p3 ? "-" + p3 : ""}${p4 ? "-" + p4 : ""}`;
-              });
-            } else {
-              input = `+7 (${input.slice(0, 3)}) ${input.slice(3, 6)}-${input.slice(6, 8)}-${input.slice(8, 10)}`;
-            }
-        setParols({...parols, phone: input});
-      };
+  const [parols, setParols]=useState({
+      mail: "",
+      parol: "",
+      phone: ""
+    })
 
   return (
-    <div className="rounded px-12 pb-8 mx-2">
-        <p className="my-1">
+    <div className="rounded px-12 pb-8 mx-2 bg-[#354555d1] w-7/12 container">
+        <p className={pStyle}>
         Электронная почта
         </p>
         <input
@@ -41,7 +27,7 @@ const ParolForm = () => {
             onChange={(e)=>setParols({...parols, mail: e.target.value})}
         ></input>
 
-        <p className="my-1">
+        <p className={pStyle}>
         Пароль
         </p>
         <input
@@ -53,7 +39,7 @@ const ParolForm = () => {
             onChange={(e)=>setParols({...parols, parol: e.target.value})}
         />
 
-        <p className="my-1">
+        <p className={pStyle}>
         Телефон
         </p>
         {/* <input
@@ -61,12 +47,19 @@ const ParolForm = () => {
             id="phone"
             placeholder="+7 (___) ___-__-__"
             value={parols.phone} 
-            onChange={handlePhoneChange}
+            
         /> */}
-        <MaskInput className={inputStyle} value={parols.phone} alwaysShowMask mask={'+7 (000) 000 - 00-00'} size={20} showMask maskChar="_" onChange={(e)=>setParols({...parols, phone: e.target.value})} />
+        <MaskInput 
+          onFocus={()=>setFocus(true)}
+          className={inputStyle+` ${focus?"text-white":"text-gray-400"}`} 
+          value={parols.phone} 
+          alwaysShowMask mask={'+7 (000) 000 - 00-00'} size={20} 
+          showMask maskChar="_" 
+          onChange={(e)=>setParols({...parols, phone: e.target.value})} 
+        />
         <br/>
         <button 
-            className="my-3 rounded border border-white p-1"
+            className="my-3 bg-cyan-800 border-white p-1 hover:bg-cyan-900 rounded-[10px] py-1 px-4 active:bg-cyan-950"
             onClick={()=>{
                 console.log(parols);
             }}
