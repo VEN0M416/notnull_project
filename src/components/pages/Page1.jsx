@@ -55,18 +55,43 @@ const Page4 = () => {
             <div className='text-center col-span-2'>Изменение за сутки</div>
           </div>
 
-          <div className='flex flex-col'>
+          <div className='flex flex-col mx-4 gap-8'> {/* body */}
 
-            <div className='flex flex-row bg-white rounded-lg text-black p-2'>
-              <div className='relative w-10 h-10 rounded-full overflow-hidden mx-auto'>
-                <img className='' src="https://invest-brands.cdn-tinkoff.ru/sber3x640.png"/>
-              </div>
-            
+            <div className='flex justify-between px-4 md:px-8
+            bg-white rounded-lg text-black p-2 cursor-pointer shadow-lg shadow-gray-900'>
               <div className=''>
-                zdfgzgagz
+                <div className='text-lg font-bold'>Сбер Банк</div>
+                <div className=' text-gray-600'>SBER</div>
+              </div>
+
+              <div className='flex gap-4 md:gap-8 lg:gap-16 xl:gap-24'>
+                <div className='flex items-center'>
+                  <div className='text-center text-xl'>218,89 ₽</div>
+                </div>
+                <div>
+                  <div className='text-green-500 font-medium text-right text-xl'>+5,43 ₽</div>
+                  <div className='text-green-500 text-right'>2,47%</div>
+                </div>
               </div>
             </div>
 
+            <div className='flex justify-between px-4 md:px-8
+            bg-white rounded-lg text-black p-2 cursor-pointer shadow-lg shadow-gray-900'>
+              <div className=''>
+                <div className='text-lg font-bold'>Газпром</div>
+                <div className=' text-gray-600'>GAZP</div>
+              </div>
+
+              <div className='flex gap-4 md:gap-8 lg:gap-16 xl:gap-24'>
+                <div className='flex items-center'>
+                  <div className='text-center text-xl'>184,04 ₽</div>
+                </div>
+                <div>
+                  <div className='text-red-500 font-medium text-right text-xl'>-15,34 ₽</div>
+                  <div className='text-red-500 text-right'>8,15%</div>
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>
