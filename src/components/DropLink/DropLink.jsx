@@ -30,7 +30,7 @@ export default function DropLink() {
       onMouseLeave={() => setIsShowing(false)}>
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <div className={`bg-sky-600 hover:bg-sky-700 h-9 flex justify-between pl-2 rounded-full items-center max-w-full min-w-min ${cookies.username.length < 4 ? 'w-28' : ''}`}>
+          <div className={`bg-sky-600 hover:bg-sky-700 h-9 flex justify-between   rounded-full items-center max-w-full min-w-min ${cookies.username.length < 4 ? 'pl-3 w-[118px] ' : 'pl-1'}`}>
             <Link to="/profile" className='mx-3'>{"" + cookies.username}</Link>
             <Menu.Button className="z-10 inline-flex w-12">
               <img className="rounded-full" src='https://termosfera.su/wp-content/uploads/2022/04/2816616767_vubrbej.jpg'></img>
@@ -48,7 +48,7 @@ export default function DropLink() {
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items
-            className="bg-sky-800 absolute left-1/2 transform -translate-x-1/2 w-20 rounded-b-md ">
+            className="bg-sky-800 absolute right-[-20px] transform -translate-x-1/2 w-20 rounded-b-md ">
             <div className="px-1 py-1">
               <Menu.Item>
                 {() => (
