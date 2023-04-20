@@ -13,8 +13,16 @@ const ParolForm = () => {
       phone: ""
     })
 
+    const handleBlur = (e) => {
+      const inputValue = e.target.value;
+      // Если значение введенного номера телефона пусто, устанавливаем цвет placeholder обратно на серый
+      if (!inputValue) {
+        setTimeout(() => setFocus(false), 0); // исправляем асинхронный вызов для обновления состояния
+      }
+    };
+
   return (
-    <div className="rounded px-12 pb-8 mx-2 bg-[#354555d1] w-7/12 container">
+    <div className="rounded px-12 mx-2 bg-[#354555d1] w-7/12 container">
         <p className={pStyle}>
         Электронная почта
         </p>
@@ -49,8 +57,10 @@ const ParolForm = () => {
             value={parols.phone} 
             
         /> */}
+        <input type="tel" name="phone" required placeholder="7 (   )   -   -  " maxLength={23} className={inputStyle}/>
         <MaskInput 
           onFocus={()=>setFocus(true)}
+          onBlur={handleBlur}
           className={inputStyle+` ${focus?"text-white":"text-gray-400"}`} 
           value={parols.phone} 
           alwaysShowMask mask={'+7 (000) 000 - 00-00'} size={20} 
