@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import MaskInput from 'react-maskinput';
 import 'react-phone-input-2/lib/style.css'
+import CustomTel from "../UI/CustomTel";
 
 const inputStyle = "my-1 bg-white/20 rounded px-3 py-1"
 const pStyle = "text-xl text-slate-300"
@@ -57,16 +58,22 @@ const ParolForm = () => {
             value={parols.phone} 
             
         /> */}
-        <input type="tel" name="phone" required placeholder="7 (   )   -   -  " maxLength={23} className={inputStyle}/>
-        <MaskInput 
+        {/* <input type="tel" name="phone" required placeholder="7 (   )   -   -  " maxLength={23} className={inputStyle}/> */}
+        
+        <CustomTel
+          //value = {parols.phone}
+          onChange={(e)=>setParols({...parols, phone: e})}
+        />
+
+        {/* <MaskInput 
           onFocus={()=>setFocus(true)}
           onBlur={handleBlur}
           className={inputStyle+` ${focus?"text-white":"text-gray-400"}`} 
           value={parols.phone} 
           alwaysShowMask mask={'+7 (000) 000 - 00-00'} size={20} 
           showMask maskChar="_" 
-          onChange={(e)=>setParols({...parols, phone: e.target.value})} 
-        />
+           
+        /> */}
         <br/>
         <button 
             className="my-3 bg-cyan-800 border-white p-1 hover:bg-cyan-900 rounded-[10px] py-1 px-4 active:bg-cyan-950"
