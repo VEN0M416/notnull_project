@@ -1,24 +1,17 @@
-package com.example.notnullproject.stockMonitoring.schedule;
+package com.example.notnullproject.globalConfig.implementation;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-public class ListOfTickers {
-    protected List<String> tickers = new ArrayList<>(List.of("SBER"));
-    private final List<String> urls = new ArrayList<>(List.of(
-            "https://smart-lab.ru/q/shares/order_by_sec_id/asc/"
-            //"https://smart-lab.ru/q/spbex/",
-            //"https://smart-lab.ru/q/usa/",
-            //"https://smart-lab.ru/q/world-stocks/"
-    ));
+@Service
+public class ListOfTickers implements ListOfTickersRepo {
 
-    protected void getTicketsFromJsoup() throws IOException {
+    public void getTicketsFromJsoup() throws IOException {
         for (String url : urls) {
             Document doc = Jsoup.connect(url).userAgent("Chrome/4.0.249.0 Safari/532.5").get();
             Elements table = doc.select("table.simple-little-table.trades-table > tbody > tr");

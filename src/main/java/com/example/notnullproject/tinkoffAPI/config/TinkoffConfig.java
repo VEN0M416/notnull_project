@@ -10,6 +10,6 @@ public class TinkoffConfig {
 
     @Bean
     public OpenApi api(){
-        return new OkHttpOpenApi("t.LAs04o63Y6NecQ5sH20fvwEx5H5HPGYL6Li7lyr4_6MH6wpDAl00QRf3I7o8ujyhNGLB8yjWEn7dXf8pU9C3mA", true);
+        return new OkHttpOpenApi("t.VfbpdvX6EyPQE4tSQ0VyhBcj5l_dm0Xe9OsVf5ikRQMrWSQkgUe2JpgN7Nn_sdLAIuuAbm9Xh1h6qfehKdArCg", true);
     }
 }
