@@ -3,7 +3,6 @@ import  Main  from '../pages/Main.jsx';
 import StocksPage from "../pages/StocksPage.jsx";
 import Page2 from "../pages/Page2.jsx";
 import Page3 from "../pages/Page3.jsx";
-import Page4 from "../pages/Page4.jsx";
 import NotFoundPage from "../pages/NotFoundPage.jsx";
 import ChatPage from "../pages/ChatPage.jsx";
 import { useCookies } from 'react-cookie';
@@ -22,7 +21,6 @@ function Router() {
         <Route path='/stocks' element={<StocksPage/>} />
         <Route path='/Page2' element={<Page2/> } />
         <Route path='/Page3' element={<Page3/> } />
-        <Route path='/Page4' element={<Page4/> } />
         <Route path='/stocks/:symbol' element={<StockPage/>}/>
         <Route path='/profile' element={<Profile/>} />
         <Route path="/*" element={<NotFoundPage/>}/>

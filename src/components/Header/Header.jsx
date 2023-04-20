@@ -21,18 +21,14 @@ const Header= () =>{
             <Link to="/" className={LnkStyle}>Main</Link>
             <Link to="/stocks" className={LnkStyle}>Акции</Link>
             <Link to="/Page2" className={LnkStyle}>Page2</Link>
-            <Link to="/Page3" className={LnkStyle}>Page3</Link>
-            <Link to="/Page4" className={LnkStyle}>Page4</Link>
+            <Link to="/Page3" className={LnkStyle}>Page3</Link> 
             {cookies.sessionId && <Link to="/chat" className={LnkStyle}>Chat</Link>} 
           </div>
 
           <div className='space-x-2 flex'>
             {
               (cookies.sessionId)? (
-                <div className='flex items-center'>
-                  <div className='mx-2'><Link to="/profile" className='mx-3'>{" "+cookies.username}</Link></div>
-                  <DropLink/>
-                </div>
+                <DropLink/>
               ) : (
                 <div className='whitespace-nowrap'>
                   <SignUpLogInForm/>

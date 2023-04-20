@@ -3,10 +3,10 @@ import LineChart from './LineChart';
 import React from 'react';
 
 
-export const ChartList=({num})=>{
+export const ChartList=({ticket})=>{
     const fillData=()=>{
-        for(let i = 0; i < num+1 ; i++){
-            if (i===num){
+        for(let i = 0; i < DataStocks.length ; i++){
+            if (DataStocks[i].ticket===ticket){
                 let Data={
                     labels: DataStocks[i].chartPrice.map((data) => data.date),
                     datasets: [{
@@ -22,8 +22,8 @@ export const ChartList=({num})=>{
 
     return(
         <>
-            <div className=' bg-slate-900	 rounded-lg p-2 '>
-                <LineChart chartData={fillData()} /> 
+            <div className=' bg-slate-900 rounded-lg p-2 '>
+                <LineChart chartData={fillData()} />
             </div>
         </>
     );
