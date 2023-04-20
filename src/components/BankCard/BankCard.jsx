@@ -46,7 +46,7 @@ const BankForm = () => {
         <div className="flex-column">
           <p className={pStyle}>Месяц/Год</p>
           <input
-            className={inputStyle+' w-[70px] mr-1'}
+            className={inputStyle+' w-[75px] mr-1'}
             id="month"
             placeholder='MM'
             type="text"
