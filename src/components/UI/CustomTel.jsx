@@ -16,8 +16,8 @@ import React from "react";
         }
 
         if([7,8,9].indexOf(inputNumbersValue[0]> -1)){
-            if(inputNumbersValue[0]=="9")inputNumbersValue = "7" + inputNumbersValue;
-            let firstSymbols = (inputNumbersValue[0]=="8")?"8":"+7";
+            if(inputNumbersValue[0]==="9")inputNumbersValue = "7" + inputNumbersValue;
+            let firstSymbols = (inputNumbersValue[0]==="8")?"8":"+7";
             formattedInputvalue = firstSymbols + " "
             if(inputNumbersValue.length > 1){
                 formattedInputvalue += "(" + inputNumbersValue.substring(1,4);

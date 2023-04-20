@@ -1,26 +1,17 @@
 import React, { useState } from "react";
-import MaskInput from 'react-maskinput';
 import 'react-phone-input-2/lib/style.css'
 import CustomTel from "../UI/CustomTel";
 
 const inputStyle = "my-1 bg-white/20 rounded px-3 py-1"
 const pStyle = "text-xl text-slate-300"
 const ParolForm = () => {
-  const [focus,setFocus]=useState(false)
+
 
   const [parols, setParols]=useState({
       mail: "",
       parol: "",
       phone: ""
     })
-
-    const handleBlur = (e) => {
-      const inputValue = e.target.value;
-      // Если значение введенного номера телефона пусто, устанавливаем цвет placeholder обратно на серый
-      if (!inputValue) {
-        setTimeout(() => setFocus(false), 0); // исправляем асинхронный вызов для обновления состояния
-      }
-    };
 
   return (
     <div className="rounded px-12 mx-2 bg-[#354555d1] w-7/12 container">
