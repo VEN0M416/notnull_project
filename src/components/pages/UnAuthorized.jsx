@@ -7,7 +7,6 @@ import error401 from '../Img/error401.png';
 function UnAuthorized() {
     return (<>
         <>
-            <Particle />
             <section className="">
                 <div className="container min-h-screen px-6 py-12 mx-auto lg:flex lg:items-center lg:gap-12">
                     <div className="wf-ull lg:w-1/2">
