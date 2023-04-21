@@ -91,6 +91,7 @@ function Particle(){
                     }
                 }
             }, */
+            /* fps_limit: 60, */
             particles: {
                 color: {
                     value: "#b3b6bc",

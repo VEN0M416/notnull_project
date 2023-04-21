@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import Particle from '../../background/Particle';
 import SignUpLogInForm from '../Forms/SignUpLogInForm';
 import { useCookies } from 'react-cookie';
 import DropLink from '../DropLink/DropLink';
@@ -14,7 +13,6 @@ const Header= () =>{
 
   return (
     <>
-      <Particle/>
       <div className="container mx-auto text-headerLinks mt-7 text-[22px] font-semibold">
         <div className='flex justify-between place-items-center'>
           <div className='space-x-2'>
