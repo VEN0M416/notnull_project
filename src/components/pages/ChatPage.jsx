@@ -111,6 +111,7 @@ function ChatPage () {
         <div className='container mx-auto h-[90vh] antialiased p-6 text-gray-800 '>
             <div className="flex flex-col flex-auto flex-shrink-0 rounded-2xl h-full p-4 bg-gradient-to-tr from-[#141E30]/80 to-[#243B55]/80 ">
                 <div className="flex flex-col h-full overflow-x-auto mb-4 ">
+                <div className="overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-300">
 
                     <div className="grid grid-cols-12 gap-y-2 ">
                         {chatHistory.map((msg) => ( /* выводим весь чат */
@@ -181,6 +182,7 @@ function ChatPage () {
                     </div>
                 </div>  
             </div>
+        </div>
         </div>
     </>)
 }

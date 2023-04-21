@@ -13,3 +13,25 @@ select option[value="female"] {
 select option[value="non-binary"] {
   background-color: rgba(255, 255, 255, 0.1);
 }
+
+/* custom scrollbar to chat & everywhere into: ScrollCustom */
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: rgb(244, 244, 244);
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: rgb(3, 132, 196);
+    border-radius: 100vh;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgb(7 89 133);
+  }
+}
