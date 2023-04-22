@@ -9,4 +9,6 @@ public interface UsersRepo extends CrudRepository<User, Integer> {
     User findByUsername(String username);
 
     User findBySession(Session session);
+
+    boolean existsByMail(String mail);
 }

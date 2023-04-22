@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class PriceHistory {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Basic

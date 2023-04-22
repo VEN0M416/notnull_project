@@ -12,7 +12,7 @@ import java.io.IOException;
 public class ListOfTickers implements ListOfTickersRepo {
 
     public void getTicketsFromJsoup() throws IOException {
-        for (String url : urls) {
+        for (String url : URLS) {
             Document doc = Jsoup.connect(url).userAgent("Chrome/4.0.249.0 Safari/532.5").get();
             Elements table = doc.select("table.simple-little-table.trades-table > tbody > tr");
             for (int i = 1; i < table.size(); i++) {

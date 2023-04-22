@@ -32,15 +32,43 @@ public class AuthorisationController {
      * @author Vladimir Krasnov
      * @param user на вход:
      *             String username,
-     *             String password
+     *             String mail
      * @return status:
      *             user already exists,
+     *             mail already exists,
      *             done
      */
-    @PostMapping("/registration")
-    private RegistrationResponse registration(@RequestBody RegistrationReq user){
-        return registrationService.save(user);
+    @PostMapping("/registration/createRegistrationCode")
+    private RegistrationResponse createRegistrationCode(@RequestBody RegistrationReq user){
+        return registrationService.createRegistrationCode(user);
     }
+
+    /**
+     * @author Vladimir Krasnov
+     * @param mail:
+     *            String mail
+     */
+    @PostMapping("/registration/sendCode")
+    private void sendCode(@RequestBody RegistrationReq mail){
+        registrationService.sendCode(mail.getMail());
+    }
+
+    /**
+     * @author Vladimir Krasnov
+     * @param user на вход:
+     *             String username,
+     *             String mail
+     *             String password
+     *             String code;
+     * @return status:
+     *             denied
+     *             done
+     */
+    @PostMapping("/registration/mailConfirmation")
+    private RegistrationResponse mailConfirmation(@RequestBody RegistrationReq user){
+        return registrationService.mailConfirmation(user);
+    }
+
 
     /**
      * @author Vladimir Krasnov

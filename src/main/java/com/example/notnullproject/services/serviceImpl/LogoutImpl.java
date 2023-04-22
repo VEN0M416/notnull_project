@@ -27,9 +27,6 @@ public class LogoutImpl implements LogoutService {
                         sessionId.getSessionId()
                 )
         );
-        Session session = sessionsRepo.findBySessionId(
-                sessionId.getSessionId()
-        );
         user.setSession(null);
         usersRepo.save(user);
         response.setStatus("done");
