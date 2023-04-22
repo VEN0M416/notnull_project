@@ -1,7 +1,7 @@
 import crypto from '../Img/crypto.png';
 import Header from '../Header/Header';
 
-const Main = () =>{
+const MainPage = () =>{
     return (
       <>
         <Header/>
@@ -14,4 +14,4 @@ const Main = () =>{
       </>
     );
   }
-  export default Main;
+  export default MainPage;
