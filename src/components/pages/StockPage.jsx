@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { ChartList } from "../charts/ChartList";
-import { DataStocks } from "../charts/MainData";
+import { ChartList } from "../Charts/ChartList";
+import { DataStocks } from "../Charts/MainData";
 import { useNavigate } from 'react-router-dom';
 
 import Header from "../Header/Header";

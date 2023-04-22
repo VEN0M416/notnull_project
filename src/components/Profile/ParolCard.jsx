@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import 'react-phone-input-2/lib/style.css'
-import CustomTel from "../UI/CustomTel";
+import CustomTel from "./CustomTel";
 
 const inputStyle = "my-1 bg-white/20 rounded px-3 py-1"
 const pStyle = "text-xl text-slate-300"

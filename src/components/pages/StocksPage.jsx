@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 import Header from '../Header/Header'
-import { DataStocks } from '../charts/MainData';
+import { DataStocks } from '../Charts/MainData';
 
 const StocksPage = () => {
   const navigate = useNavigate();

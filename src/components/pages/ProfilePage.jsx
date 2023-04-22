@@ -1,13 +1,13 @@
 import Header from '../Header/Header'
 import { Tab } from '@headlessui/react';
-import ProfileForm from '../ProfileCard/ProfileCard';
-import ParolForm from '../ParolCard/ParolCard';
-import BankForm from '../BankCard/BankCard';
+import ProfileForm from '../Profile/ProfileCard';
+import ParolForm from '../Profile/ParolCard';
+import BankForm from '../Profile/BankCard';
 import { useState } from 'react';
 
 const tabStyle = "mt-1 px-3 py-6 text-gray-400 leading-5 rounded-md focus:outline-none focus:text-white focus:bg-gray-700 hover:text-white hover:bg-gray-700"
 
-const Profile = () =>{
+const ProfilePage = () =>{
 
   const [activeTab, setActiveTab] = useState('tab1'); // Состояние для отслеживания активной кнопки
 
@@ -55,4 +55,4 @@ const Profile = () =>{
     </>
     );
   }
-  export default Profile;
+  export default ProfilePage;

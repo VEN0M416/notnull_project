@@ -1,5 +1,5 @@
 import Header from '../Header/Header'
-import GenderSelect from '../GenderSelect/GenderSelect';
+import GenderSelect from '../Profile/GenderSelect';
 import { Tab } from '@headlessui/react';
 import { useState } from 'react';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import SignUpLogInForm from '../Forms/SignUpLogInForm';
 import { useCookies } from 'react-cookie';
-import DropLink from '../DropLink/DropLink';
+import DropLink from './DropLink';
 
 
 const LnkStyle="hover:bg-hoverBg rounded-[10px] py-1 px-4 active:bg-activeBg";

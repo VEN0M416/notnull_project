@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import GenderSelect from "../GenderSelect/GenderSelect";
+import GenderSelect from "./GenderSelect";
 
 const inputStyle = "my-1 bg-white/20 rounded px-3 py-1"
 const pStyle = "text-xl text-slate-300"
