@@ -36,7 +36,7 @@ const ProfilePage = () =>{
               </Tab>
               </Tab.List>
             </div>
-            <Tab.Panels className="ml-3 rounded w-7/12">
+            <Tab.Panels className="ml-3 rounded w-8/12">
               <Tab.Panel >
                 <ProfileForm/>
               </Tab.Panel>
