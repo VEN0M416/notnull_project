@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import GenderSelect from "./GenderSelect";
+import PhotoInputForm from "./PhotoInput"; 
 
-const inputStyle = "my-1 bg-white/20 rounded px-3 py-1"
+const inputStyle = "bg-white/20 rounded px-3 py-1"
 const pStyle = "text-xl text-slate-300"
 const ProfileForm = () => {
   const [focus, setFocus]=useState(false)
@@ -14,8 +15,12 @@ const ProfileForm = () => {
   })
 
   return (
-    <div className="flex m-3 rounded bg-[#354555d1] backdrop-blur-sm juctify-center">
-      <div className="mx-2 items-center justify-center">
+    <div className="container flex rounded bg-[#354555d1] backdrop-blur-sm juctify-center">
+      <div className="flex flex-col items-center">
+        <PhotoInputForm/>
+      </div>
+
+      <div className=" items-center justify-center">
         <p className={pStyle}>Имя</p>
         <input placeholder='Имя' 
           className={inputStyle}
@@ -26,7 +31,6 @@ const ProfileForm = () => {
         <p className={pStyle}>Пол</p>
         <GenderSelect
         onChange={(e)=>setUser({...user, gender: e})}
-        
         />
         
         <p className={pStyle}>Никнейм</p>
@@ -45,8 +49,8 @@ const ProfileForm = () => {
         > Сохранить</button>
       </div>
 
-      <div className="mx-3 items-center justify-center">
-        <p className={pStyle}>Фамилия</p>
+      <div className="px-2 items-center justify-center">
+        <p className={pStyle + " w-full"}>Фамилия</p>
         <input placeholder='Фамилия' 
           className={inputStyle}
           value={user.lastname} 
