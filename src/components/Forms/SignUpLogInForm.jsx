@@ -9,14 +9,21 @@ const InputStyle=' flex w-full my-4 p-3 pl-9 rounded-[10px] bg-gray-100 placehol
 
 export default function SignUpLogInForm({buttonColor}) {
 
-    const [cookies, setCookie] = useCookies(['sessionId','username']);
+    const [, setCookie] = useCookies(['sessionId','username']);
     const [PassWrong ,setPassWrong] = useState(false);
     const [NotReg ,setNotReg] = useState(false);
     const [alreadyReg ,setAlreadyReg] = useState(false);
+    const [mailAlreadyReg, setMailAlreadyReg] = useState(false);
+    const [alert, setAlert] = useState(false);
+    const [confirmCode, setConfirmCode] = useState("");
+    const [codeEmpty, setCodeEmpty] = useState(false);
+    const [EmptyEmail, setEmptyEmail] = useState(false);
+    const [codeError, setCodeError] = useState(false);
 
     const [user, setUser] = useState({
         name:"",
         password:"",
+        mail:""
     })
     const [isCorrect, setCrPss] = useState(true);
     const [Empty, setEmpty] = useState(false);
@@ -24,30 +31,29 @@ export default function SignUpLogInForm({buttonColor}) {
     const [typeForm, setTypeForm] = useState(true); /* true - sign up form; false - log in form*/
 
     const send1 = () => {
-        if (user.name === "" || user.password === "") {
+        if (user.name === "" || user.password === "" || user.mail === "") {
             setEmpty(true);
+            setEmptyEmail(true);
             return;
-        }   
-        api.post('/authorisation/registration',{username: user.name, password: user.password}).then((res)=>{
+        } 
+        api.post('/authorisation/registration/createRegistrationCode',{username: user.name, mail: user.mail}).then((res)=>{
             if(res.data.status === 'done'){
-                api.post('/authorisation/login',{username: user.name, password: user.password}).then((res)=>{
-                    setCookie('sessionId', res.data.sessionId, { path: '/', sameSite: 'Lax' });
-                    setCookie('username', user.name, { path: '/', sameSite: 'Lax' });
-                    closeModal();
-                    setUser({name: "", password: ""});
-                });
+                api.post('/authorisation/registration/sendCode',{mail: user.mail});
+                setAlert(true);
             } else if(res.data.status === 'user already exists'){
                 setAlreadyReg(true);
                 return;
-            }          
+            } else if(res.data.status === 'mail already exists'){
+                setMailAlreadyReg(true);
+                return;
+            }
         });
-        
     }
     const send2 = () => {
         if (user.name === "" || user.password === "") {
             setEmpty(true);
             return;
-        }
+        } 
         api.post('/authorisation/login',{username: user.name, password: user.password}).then((res)=>{
             if(res.data.status === 'done'){
                 setCookie('sessionId', res.data.sessionId, { path: '/', sameSite: 'Lax' });
@@ -67,8 +73,34 @@ export default function SignUpLogInForm({buttonColor}) {
 
     }
 
+    const isEmptyEmail=()=>{
+        (user.mail === "")? setEmptyEmail(true) : setEmptyEmail(false);
+    }
     const isEmpty=()=>{
         (user.name === "" || user.password === "")? setEmpty(true) : setEmpty(false);
+    }
+    const isCodeEmpty=()=>{
+        (confirmCode === "")? setCodeEmpty(true) : setCodeEmpty(false);
+    }
+
+    const sendCode = () =>{
+        if (confirmCode === ""){
+            setCodeEmpty(true);
+            return;
+        }
+        api.post('/authorisation/registration/mailConfirmation',{username: user.name, mail: user.mail, password: user.password, code: confirmCode}).then((res)=>{
+            if(res.data.status === 'done'){
+                api.post('/authorisation/login',{username: user.name, password: user.password}).then((res)=>{
+                    setCookie('sessionId', res.data.sessionId, { path: '/', sameSite: 'Lax' });
+                    setCookie('username', user.name, { path: '/', sameSite: 'Lax' });
+                    closeModal();
+                    setUser({name: "", password: ""});
+                });
+                console.log("Пользователь успешно зарегистрирован!");
+            } else if (res.data.status === 'denied'){
+                setCodeError(true);
+            }
+        });
     }
 
     /* ------------------------------------------------------------------------------------- */
@@ -81,6 +113,11 @@ export default function SignUpLogInForm({buttonColor}) {
         setNotReg(false);
         setPassWrong(false);
         setAlreadyReg(false);
+        setMailAlreadyReg(false);
+        setAlert(false);
+        setConfirmCode("");
+        setCodeError(false);
+        setEmptyEmail(false);
     }
 
     function openModal() {
@@ -113,7 +150,7 @@ export default function SignUpLogInForm({buttonColor}) {
         </div>
 
         <Transition appear show={isOpen} as={Fragment}>
-            <Dialog as="div" className="relative z-10" onClose={closeModal}>
+            <Dialog as="div" className="relative z-10" onClose={openModal}>
             <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -144,7 +181,7 @@ export default function SignUpLogInForm({buttonColor}) {
                         as="h3"
                         className="flex justify-center mb-7 text-lg font-medium leading-6 text-white"
                     >
-                        <svg 
+                        {!alert && <><svg 
                             xmlns="http://www.w3.org/2000/svg" 
                             fill="none" 
                             viewBox="0 0 24 24" 
@@ -155,10 +192,11 @@ export default function SignUpLogInForm({buttonColor}) {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                         </svg>
                         {typeForm && <>USER SIGNUP</>}
-                        {!typeForm && <>USER LOGIN</>}
+                        {!typeForm && <>USER LOGIN</>}</>}
+                        {alert && <>CONFIRM EMAIL</>}
                     </Dialog.Title>
 
-                    <div className="opacity-0 animate-appearanceInp mt-2">
+                    {!alert && <><div className="opacity-0 animate-appearanceInp mt-2">
                         <svg 
                             xmlns="http://www.w3.org/2000/svg" 
                             fill="none" 
@@ -174,6 +212,22 @@ export default function SignUpLogInForm({buttonColor}) {
                             placeholder='username' 
                             onChange={(e)=>{setUser((prevState=>({...prevState,name: e.target.value}))); isEmpty();}}
                         />
+                        {typeForm && <><svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            strokeWidth="1.5" 
+                            stroke="currentColor" 
+                            className=" fixed w-6 h-6 ml-2 mt-3 text-black/50">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                        </svg>
+                        <input 
+                            className={InputStyle} 
+                            type="email" 
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                            placeholder='email' 
+                            onChange={(e)=>{setUser((prevState=>({...prevState,mail: e.target.value}))); isEmptyEmail();}}
+                        /></>}
                         <svg 
                             xmlns="http://www.w3.org/2000/svg" 
                             fill="none" 
@@ -210,16 +264,7 @@ export default function SignUpLogInForm({buttonColor}) {
                             placeholder='confirm password' 
                             onChange={(e)=>{e.target.value === user.password ? setCrPss(true) : setCrPss(false);}}
                         />
-                        {!isCorrect && <span className='text-base text-red-500'>Пароли не совпадают!</span>}</>}
-                        {/* <div className='flex mt-2 text-white justify-between '>
-                            <div>
-                                <input type="checkbox" id="rememder" className=' cursor-pointer'/>
-                                <label className="ml-3 text-base cursor-pointer" htmlFor="rememder">Remember Me</label>
-                            </div>
-                            <p
-                                className=' cursor-pointer'
-                            >Forgot password?</p>
-                        </div> */}
+                        {!isCorrect && <span className='flex justify-center text-base text-red-500'>Пароли не совпадают!</span>}</>}
                     </div>
                     <div className='flex justify-center mt-5 text-red-500 items-center'>
                         {(Empty || NotReg || PassWrong) && <svg 
@@ -231,10 +276,11 @@ export default function SignUpLogInForm({buttonColor}) {
                             className="w-7 h-7 mr-2">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
                         </svg>}
-                        {Empty && <>Заполните все поля формы!</>}
+                        {(Empty || EmptyEmail) && <>Заполните все поля формы!</>}
                         {NotReg && <>Вы ещё не зарегистрированы!</>}
                         {PassWrong && <>Неверный пароль!</>}
-                        {alreadyReg && <>Такой пользователь уже существует!</>}
+                        {alreadyReg && <>Такой пользователь уже зарегистрирован!</>}
+                        {mailAlreadyReg && <>Пользователь с такой почтой уже зарегистрирован!</>}
                     </div>
                     <div className="mt-7">
                         {typeForm && <button
@@ -277,7 +323,40 @@ export default function SignUpLogInForm({buttonColor}) {
                                 resetIsShowing();
                             }}
                         >Are you not registered yet? Go to sign up</p>}
-                    </div>
+                    </div></>}
+                    {alert && <>
+                        <div className="opacity-0 animate-appearanceInp mt-2">
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                fill="none" 
+                                viewBox="0 0 24 24" 
+                                strokeWidth="1.5" 
+                                stroke="currentColor" 
+                                className="fixed w-6 h-6 ml-2 mt-3 text-black/50">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                            </svg>
+                            <input 
+                                className={InputStyle} 
+                                type="text" 
+                                placeholder='enter code' 
+                                onChange={(e)=>{setConfirmCode(e.target.value); isCodeEmpty();}}
+                            />
+                        </div>
+                        <div className='flex justify-center my-5 text-red-500 items-center'>
+                            {codeEmpty && <>Введите код!</>}
+                            {codeError && <>Неверный код!</>}
+                        </div>
+                        <div className='flex justify-between space-x-3'>
+                            <button
+                                className="w-1/2 rounded-md border border-transparent bg-[#2fc0ff] px-4 py-2 text-base text-white hover:bg-blue-500 active:bg-[#2fc0ff] focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                onClick={sendCode}
+                            >SEND CODE</button>
+                            <button
+                                className="w-1/2 rounded-md border border-transparent bg-[#2fc0ff] px-4 py-2 text-base text-white hover:bg-blue-500 active:bg-[#2fc0ff] focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                onClick={()=>setAlert(false)}
+                            >BACK</button>
+                        </div>
+                    </>}
                 </Dialog.Panel>
                 </Transition.Child>
                 </div>

@@ -43,7 +43,7 @@ const Header= () =>{
 
               <input type="checkbox" id="burgerButton" /> {/* 'виртуальная' кнопка */}
               
-              <label class="sidebarIcon" htmlFor='burgerButton'>  {/* дизайн кнопки */}
+              <label className="sidebarIcon" htmlFor='burgerButton'>  {/* дизайн кнопки */}
                       <div className="spinner diagonal part-1"></div>
                       <div className="spinner horizontal"></div>
                       <div className="spinner diagonal part-2"></div>
