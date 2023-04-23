@@ -111,7 +111,7 @@ function ChatPage () {
         <div className='container mx-auto h-[90vh] antialiased p-6 text-gray-800 '>
             <div className="flex flex-col flex-auto flex-shrink-0 rounded-2xl h-full p-4 bg-gradient-to-tr from-[#141E30]/80 to-[#243B55]/80 ">
                 <div className="flex flex-col h-full overflow-x-auto mb-4 ">
-                <div className="overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-300">
+                <div className="overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-300 h-full">
 
                     <div className="grid grid-cols-12 gap-y-2 ">
                         {chatHistory.map((msg) => ( /* выводим весь чат */
@@ -142,9 +142,9 @@ function ChatPage () {
                     </div>
                     {!connection && (<div className="text-center text-red-500">Чат сломался :(</div>)} {/* если connection = false */}
                 </div>
-                <div className="flex flex-row items-center h-16 rounded-xl bg-[#314f71] bg-transparent w-full px-4" >
+                <div className="flex flex-row h-16 rounded-xl bg-[#314f71] bg-transparent w-full px-4" >
 
-                    <div className="flex-grow ml-4">
+                    <div className="flex-grow ml-4 ">
                         <div className="relative w-full">
                             <input /* ввод сообщения */
                             onKeyDown={handleKeyDown}

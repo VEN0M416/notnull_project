@@ -15,7 +15,9 @@ select option[value="non-binary"] {
 }
 
 /* custom scrollbar to chat & everywhere into: ScrollCustom */
-@layer utilities {
+@layer components {
+
+  /* SCROLL BAR _________________________________________ */
   .scrollbar::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -34,4 +36,6 @@ select option[value="non-binary"] {
   .scrollbar::-webkit-scrollbar-thumb:hover {
     background: rgb(7 89 133);
   }
+
+  /* ___________________________________________________ */
 }

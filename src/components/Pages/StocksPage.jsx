@@ -25,13 +25,13 @@ const StocksPage = () => {
   return (
     <>
       <Header />
-      <div className='w-11/12 mx-auto mt-5'>
+      <div className='w-full px-4 pt-10 sm:w-11/12 sm:px-0 mx-auto mt-5'>
 
         {/* Список акций */}
-        <div className="bg-gradient-to-tr from-white/10 to-white/20 backdrop-blur-md text-white rounded-lg shadow-md p-6">
+        <div className="p-2 sm:p-6 bg-gradient-to-tr from-white/10 to-white/20 backdrop-blur-md text-white rounded-lg shadow-md ">
 
           {/* Поиск */}
-          <div className='w-6/12'>
+          <div className='w-full sm:w-6/12 mt-2 sm:mt-0'>
             <input type="text" value={searchText}
               onChange={(e) => setSearchText(e.target.value)} placeholder="Название или тикер"
               className='bg-white py-2.5 px-5 w-full rounded-full text-black focus:outline-none'
@@ -44,8 +44,8 @@ const StocksPage = () => {
             <button onClick={() => { setShowStocks(!showStocks) }} className={`hover:text-white ${showStocks ? 'font-light text-gray-300' : 'text-xl font-medium'}`}>Облигации</button>
           </div>
 
-          <table className="w-full table-auto">
-            <thead>
+          <table className="w-full table-fixed sm:table-auto ">
+            <thead className='text-xs sm:text-xl'>
               <tr className="border-b-2 border-gray-200">
                 <th className="text-left pb-2">Название</th>
                 <th className="text-center pb-2 px-5">График</th>

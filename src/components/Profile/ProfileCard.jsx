@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import GenderSelect from "./GenderSelect";
 import PhotoInputForm from "./PhotoInput"; 
 
+import { useDispatch } from "react-redux";
+import { saveFirstName } from "../../core/profileSlice";
+
 const inputStyle = "bg-white/20 rounded px-3 py-1"
 const pStyle = "text-xl text-slate-300"
 const ProfileForm = () => {
@@ -13,6 +16,9 @@ const ProfileForm = () => {
     gender:"",
     bdate:""
   })
+
+  const dispatch = useDispatch();
+
 
   return (
     <div className="container flex rounded bg-[#354555d1] backdrop-blur-sm juctify-center">
@@ -44,7 +50,7 @@ const ProfileForm = () => {
           className="my-3 bg-cyan-800 border-white p-1 hover:bg-cyan-900 rounded-[10px] py-1 px-4 active:bg-cyan-950"
           onClick={()=>{
             console.log(user);
-
+            dispatch(saveFirstName(user.name))
           }}
         > Сохранить</button>
       </div>
