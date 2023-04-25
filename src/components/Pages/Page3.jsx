@@ -1,23 +1,91 @@
 import Header from '../Header/Header'
 import GenderSelect from '../Profile/GenderSelect';
-import { Tab } from '@headlessui/react';
 import { useState } from 'react';
+import avatar from '../Img/profile.png'
 
-const tabStyle = "my-1 px-3 py-2 text-gray-400 leading-5 rounded-md focus:outline-none focus:text-white focus:bg-gray-700 hover:text-white hover:bg-gray-700";
-const inputStyle = "my-1 bg-white/20 rounded placeholder:text-gray-400 text-white px-3 py-1";
+const inputStyle = "w-full my-1 bg-white rounded placeholder:text-gray-400 text-black px-3 py-1";
 
-const Page3 = () =>{
+const Page3 = () => {
   const [gender, setGender] = useState("");
-  const handleGenderChange=(e)=>{
+  const handleGenderChange = (e) => {
     setGender(e);
   }
 
   return (
     <>
-      <Header/>
-      <div className='container mx-auto text-black'>
-        <p className='text-2xl pt-[50px] text-white'>Page3</p>
-        <div className=" container mx-auto text-md mt-5 bg-blue-950/50 backdrop-blur-sm rounded-md h-[700px]">
+      <Header />
+      <div className='container grid grid-cols-2 grid-rows-3 gap-7 mx-auto mt-6 bg-white/30 backdrop-blur-sm rounded-md p-7'>
+        <div className="row-span-3 border border-white p-3 rounded-md text-white">
+          <div className="flex justify-center h-1/3">
+            <img
+              className=" h-full bg-slate-500 rounded-full "
+              src={avatar}
+              alt="avatar"
+            />
+          </div>
+          <h1
+            className=" text-2xl text-white font-md my-2 text-center"
+          >Личные данные</h1>
+          <hr />
+          <div className='w-1/2 mx-auto my-5'>
+            <div className='w-full'>
+              <label
+                className='flex'
+                htmlFor="name"
+              >Имя</label>
+              <input
+                id='name'
+                placeholder="Имя"
+                className={inputStyle}
+              />
+            </div>
+            <div className='w-full'>
+              <label
+                className='flex'
+                htmlFor="lastName"
+              >Фамилия</label>
+              <input
+                id='lastName'
+                placeholder="Фамилия"
+                className={inputStyle}
+              />
+            </div>
+            <div className='w-full'>
+              <label
+                className='flex'
+                htmlFor="nickName"
+              >Никнейм</label>
+              <input
+                id='nickName'
+                placeholder="Никнейм"
+                className={inputStyle}
+              />
+            </div>
+            <div className='w-full'>
+              <label
+                className='flex'
+                htmlFor="meeting-date"
+              >Дата рождения</label>
+              <input
+                type='date'
+                id="meeting-date"
+                name="meeting-date"
+                className={inputStyle + " [color-scheme:light]"}
+              />
+            </div>
+            <div className=''>
+              <GenderSelect onChange={handleGenderChange} />
+            </div>
+          </div>
+
+        </div>
+        <div className=" border border-white p-3 rounded-md">
+
+        </div>
+        <div className="row-span-2 border border-white p-3 rounded-md">
+
+        </div>
+        {/* <div className=" container mx-auto text-md mt-5 bg-blue-950/50 backdrop-blur-sm rounded-md h-[700px]">
           <Tab.Group >
             <div className='flex justify-center flex-wrap sm:flex-nowrap'>
               <div className=' ms:whitespace-nowrap rounded-xl p-1 w-5/12 h-max mx-1 text-lg'>
@@ -100,7 +168,7 @@ const Page3 = () =>{
                       <br />
                       <button 
                         className="my-3 border px-4 py-1 rounded text-white"
-                        /* onClick={} */
+                           onClick={}
                       > Сохранить</button>
                     </div> 
                   </div>
@@ -134,14 +202,14 @@ const Page3 = () =>{
                     </div>
                     <button 
                       className="px-3 border color-white rounded my-2 py-1"
-                      /* onClick={} */
+                         onClick={}
                     > Подтвердить</button>
                   </div>
                 </Tab.Panel>
               </Tab.Panels>
             </div>
           </Tab.Group>
-        </div>
+        </div> */}
       </div>
     </>
   );

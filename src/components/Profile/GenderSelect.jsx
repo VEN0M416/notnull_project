@@ -9,11 +9,11 @@ function GenderSelect( {onChange} ) {
   };
 
   return (
-    <div className="flex items-center bg-transperent pb-2">
-     
+    <div>
+      <label className="flex" htmlFor="gender-select">Пол</label>
       <select
         id="gender-select"
-        className={`rounded-md border-white-20 bg-white/20 border ${focus?"text-white":"text-gray-400"} color-white shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50`}
+        className={`flex rounded-md border-white-20 bg-white/20 border ${focus?"text-white":"text-gray-400"} color-white shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50`}
         onFocus={()=>setFocus(true)}
         onChange={handleGenderChange}
       >
