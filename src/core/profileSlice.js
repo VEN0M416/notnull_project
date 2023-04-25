@@ -6,7 +6,9 @@ export const profileSlice = createSlice({
         firstname: '',
         lastname: '',
         phone: '',
-        cards: [], 
+        cards: [
+            {cardName: "Kabanets Vladimir", cardNumber: "1234123412341234", cardDate: '09/25', cardCvv:'123',},
+        ], 
     },
     reducers: {
         savePhone: (state, action) => {state.phone = action.payload},
