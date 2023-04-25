@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 
 const inputStyle = "my-1 bg-white/20 rounded px-3 py-1"
-const pStyle = "text-xl text-slate-300"
+const pStyle = "lg:text-xl text-slate-300"
 
 const BankForm = () => {
     //Проверка переноса строк
@@ -25,14 +25,14 @@ const BankForm = () => {
   };
 
   return (
-    <div className="text-white px-12 pb-8 container w-7/12 bg-[#354555d1] rounded">
+    <div className="text-white lg:px-12 pb-8 container lg:w-7/12 md:w-10/12 w-full bg-[#354555d1] rounded">
       <div className="flex-column w-full justify-center mb-3">
         <p className={pStyle}>Введите номер карты</p>
         <input
           className={inputStyle + ' w-full'}
           id="card"
           placeholder="1234567890123456"
-          type="number"
+          type="text"
           maxLength={19}
           value={bank.number}
           onChange={(e) => {
@@ -46,7 +46,7 @@ const BankForm = () => {
         <div className="flex-column">
           <p className={pStyle}>Месяц/Год</p>
           <input
-            className={inputStyle+' w-[75px] mr-1'}
+            className={inputStyle+' w-[40px] md:w-[60px] mr-1'}
             id="month"
             placeholder='MM'
             type="text"
@@ -60,7 +60,7 @@ const BankForm = () => {
           />
            / 
           <input
-            className={inputStyle+' w-[70px] ml-1'}
+            className={inputStyle+' w-[45px] md:w-[70px] ml-1'}
             id="year"
             placeholder='YY'
             type="text"
@@ -77,7 +77,7 @@ const BankForm = () => {
         <div className="flex-column">
           <p className={pStyle}>CVV</p>
           <input
-            className={inputStyle + ' w-[110px]'}
+            className={inputStyle + ' w-[70px] lg:w-[110px]'}
             id="CVV"
             type='password'
             placeholder='CVV'

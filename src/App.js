@@ -11,6 +11,9 @@ import ChatPage from "./components/Pages/ChatPage";
 import ProfilePage from "./components/Pages/ProfilePage";
 import NotFoundPage from "./components/Pages/NotFoundPage";
 import UnAuthorized from "./components/Pages/UnAuthorized";
+import ProfileCard from "./components/Profile/ProfileCard"
+import ParolForm from "./components/Profile/ParolCard";
+import BankForm from "./components/Profile/BankCard";
 
 function App() {
   const [cookies, setCookie] = useCookies(['sessionId']);
@@ -24,7 +27,10 @@ function App() {
           <Route path='/stocks' element={<StocksPage/>} />
           <Route path='/Page2' element={<Page2/> } />
           <Route path='/Page3' element={<Page3/> } />
-          <Route path='/stocks/:symbol' element={<StockPage/>}/>
+          <Route path='/profile/personal'element={<ProfileCard/>}/>
+          <Route path='/profile/parols'element={<ParolForm/>}/>
+          <Route path='/profile/bank'element={<BankForm/>}/>
+          <Route path='/stocks/:symbol' element={<StockPage/>} />
           <Route path='/profile' element={<ProfilePage/>} />
           <Route path="/*" element={<NotFoundPage/>}/>
           <Route path='/401error' element={cookies.sessionId ? <Navigate to='/' replace /> : <UnAuthorized />} />
